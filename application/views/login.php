@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>vinos</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/png" href="http://www.cineyaccion.com/wp-content/uploads/favicon.png"/>
 <style>
 body {font-family: Arial, Helvetica, sans-serif;}
 form {border: 3px solid #f1f1f1;}
