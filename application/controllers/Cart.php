@@ -10,7 +10,7 @@ class Cart extends CI_Controller {
     $this->load->library('session');
 
     $this->load->helper('url');
-    //$this->load->model('Dif_model');
+    //$this->load->model('cart_model');
   }
 
 	public function index(){	
