@@ -1,4 +1,5 @@
 create database vinateria;
+
 create table usuarios (
 id_usuario int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
 nombre_completo varchar(100) not null,
@@ -15,16 +16,17 @@ nombre varchar(100) not null,
 creacion timestamp default now()
 );
 
-create table categoria (
+create table pedido (
 id_pedido int(11) AUTO_INCREMENT PRIMARY KEY,
 id_sucursal int(11) not null,
 id_usuario_compra  int(11) not null,
 id_usuario_venta  int(11) not null,
 descuento int(11),
+estatus varchar(50) not null,
 creacion timestamp default now()
 );
 
-create table categoria (
+create table pedido2cliente (
 id_pedido_cliente int(11) AUTO_INCREMENT PRIMARY KEY,
 id_pedido  int(11) not null,
 id_producto  int(11) not null,
@@ -37,6 +39,8 @@ id_nivel int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
 tipo varchar (100) not null,
 creacion timestamp default now()
 );
+
+
 create table productos(
 id_producto int (11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
 nombre varchar(100) not null,
@@ -60,6 +64,7 @@ correo varchar(100) not null,
 telefono varchar(20) not null,
 creacion timestamp default now()
 );
+
 create table sucursal(
 id_sucursal int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
 nombre varchar(100) not null,
