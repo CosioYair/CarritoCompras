@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Cart extends CI_Controller {
+class Cart_admin extends CI_Controller {
 
 	public function __construct() {
     parent::__construct();
@@ -19,8 +19,28 @@ class Cart extends CI_Controller {
 		$this->load->view('login');
 	}
 
+	public function catCategorias(){
+			$this->isUser();
+			$crud = new grocery_CRUD();
+			$crud->set_theme('flexigrid');
+			$crud->set_table("cat_municipios");
+			$crud->set_subject('Catalogo de municipio');
+			$crud->set_primary_key('cat_municipios','id');
+			$crud->field_type('status','hidden',0);
+			$crud->columns('nombre','delegacion');
+			$output = $crud->render();
+			$output->titulo = "Home > Municipios";
+			$this->outputDashboard('content',$output);
+	}
+	public function outputDashboard($view, $data = false) {
+		$user = $this->isUser();
+		$this->load->view('admin/header');
+		$this->load->view('admin/' . $view, $data);
+		$this->load->view('admin/footer');	
+	}
 	/*Users metodo para verificar si es usuario*/
 	private function isUser($redirect = true, $admin = false) {
+		//die(var_dump($_SESSION));
 		if(isset($_SESSION['id'])) {
 			$id_admin = $_SESSION['id'];
 			$this->load->model('Vinos_model');
@@ -54,13 +74,4 @@ class Cart extends CI_Controller {
 		}
 	}
 
-	public function output($view,$data=""){
-		$this->load->view('header');
-		$this->load->view($view,$data);
-		$this->load->view('footer');
-	}
-
-	public function home_view(){	
-		$this->output('home',false);
-	}
 }
