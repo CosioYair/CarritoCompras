@@ -20,20 +20,19 @@ class Cart_admin extends CI_Controller {
 	}
 
 	public function catCategorias(){
-			$this->isUser();
+			//$this->isUser();
 			$crud = new grocery_CRUD();
 			$crud->set_theme('flexigrid');
-			$crud->set_table("cat_municipios");
-			$crud->set_subject('Catalogo de municipio');
-			$crud->set_primary_key('cat_municipios','id');
-			$crud->field_type('status','hidden',0);
-			$crud->columns('nombre','delegacion');
+			$crud->set_table("categoria");
+			$crud->set_subject('Catalogo de categorias');
+			$crud->set_primary_key('categoria','id');
+			$crud->columns('nombre','creacion');
 			$output = $crud->render();
-			$output->titulo = "Home > Municipios";
+			$output->titulo = "Home > Categorias";
 			$this->outputDashboard('content',$output);
 	}
 	public function outputDashboard($view, $data = false) {
-		$user = $this->isUser();
+		//$user = $this->isUser();
 		$this->load->view('admin/header');
 		$this->load->view('admin/' . $view, $data);
 		$this->load->view('admin/footer');	
@@ -72,6 +71,9 @@ class Cart_admin extends CI_Controller {
 			
 			return false;
 		}
+	}
+	public function test(){
+		die('sasasasas');
 	}
 
 }

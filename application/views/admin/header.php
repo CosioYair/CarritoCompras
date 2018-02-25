@@ -70,7 +70,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="<?php echo base_url(); ?>assets/admin/dist/img/avatar-ninja.png" class="user-image" alt="User Image">
-              <span class="hidden-xs"><?php echo $_SESSION['correo'];?></span>
+              <span class="hidden-xs"><?php echo 'nombre';?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- Menu Footer-->
@@ -95,7 +95,7 @@
           <img src="<?php echo base_url(); ?>assets/admin/dist/img/avatar-ninja.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p><?php echo $_SESSION['nombre'];?></p>
+          <p><?php echo 'nombre';?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
