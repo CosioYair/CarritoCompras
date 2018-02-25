@@ -36,7 +36,7 @@
 <!--===============================================================================================-->
 </head>
 <body class="animsition">
-
+<div id="app">
 	<!-- Header -->
 	<header class="header1">
 		<!-- Header desktop -->

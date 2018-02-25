@@ -178,7 +178,7 @@
 	<!-- Container Selection1 -->
 	<div id="dropDownSelect1"></div>
 
-
+</div>
 
 <!--===============================================================================================-->
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/jquery/jquery-3.2.1.min.js"></script>

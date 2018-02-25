@@ -70,22 +70,29 @@ span.psw {
 </head>
 <body>
 
+<div id="app">
+  <form action="/action_page.php">
+    <div class="imgcontainer">
+      <img src="http://bashooka.com/wp-content/uploads/2012/07/wine-logo-designs-2.png" alt="Avatar" class="avatar">
+    </div>
 
-<form action="/action_page.php">
-  <div class="imgcontainer">
-    <img src="http://bashooka.com/wp-content/uploads/2012/07/wine-logo-designs-2.png" alt="Avatar" class="avatar">
-  </div>
+    <div class="container">
+      <label for="uname"><b>Usuario</b></label>
+      <input type="text" placeholder="Ingresa usuario" name="uname" required>
 
-  <div class="container">
-    <label for="uname"><b>Usuario</b></label>
-    <input type="text" placeholder="Ingresa usuario" name="uname" required>
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Ingresa contrasena" name="psw" required>
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Ingresa contrasena" name="psw" required>
-        
-    <button type="submit">Login</button>
-  </div>
-</form>
-
+      <label for="psw"><b>{{ login.prop.errorMessage }}</b></label>
+      <button type="submit">Login</button>
+    </div>
+  </form>
+</div>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/vue.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/general-scripts.js"></script>
 </body>
 </html>
