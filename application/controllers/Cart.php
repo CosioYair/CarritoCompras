@@ -1,22 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once APPPATH . 'controllers/Middleware.php';
 
-class Cart extends CI_Controller {
+class Cart extends Middleware {
 
 	public function __construct() {
     parent::__construct();
-
-    $this->load->database();
-    $this->load->library('session');
-
-    $this->load->helper('url');
-    $this->load->library('grocery_CRUD');
     $this->load->model('Vinos_model');
-    $this->load->library('session');
   }
 
-	public function index(){	
-		$this->load->view('login');
+	public function index(){
+		$this->load->view('home');
 	}
 
 	/*Users metodo para verificar si es usuario*/
@@ -29,11 +23,11 @@ class Cart extends CI_Controller {
 			if ($user->tipo =='admin') {
 				if($user) {
 					return $user;
-					
+
 					if($redirect) {
 						$this->outputDashboard('dashboard');
 					}
-					
+
 					return $user;
 				} else {
 					if($redirect) {
@@ -42,14 +36,14 @@ class Cart extends CI_Controller {
 					return false;
 				}
 			} elseif (isset($_SESSION['id']) || $_SESSION['tipo'] =="captu" || $_SESSION['tipo'] =="captu_servicio") {
-			
+
 			redirect('dashboard-del','refresh');
 			}
 		}else {
 			if($redirect) {
 				header('Location: ' . site_url(''));
 			}
-			
+
 			return false;
 		}
 	}
@@ -60,7 +54,7 @@ class Cart extends CI_Controller {
 		$this->load->view('footer');
 	}
 
-	public function home_view(){	
+	public function home_view(){
 		$this->output('home',false);
 	}
 }
