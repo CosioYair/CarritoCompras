@@ -36,10 +36,11 @@ class Vinos_model extends CI_Model  {
 		$this->db->join('productos', 'productos.id_producto = pedido2cliente.id_producto');
 		$this->db->join('usuarios', 'usuarios.id_usuario = pedido.id_usuario_compra');
 		$this->db->join('usuarios as u', 'u.id_usuario = pedido.id_usuario_venta');
-		$this->db->group_by("pedido2cliente.id_pedido");
+		//$this->db->group_by("pedido2cliente.id_pedido");
 		$this->db->order_by('pedido2cliente.creacion', 'ASC');
 		$query = $this->db->get();
 		$row = $query->result_array();
+
 		return $row;
 	}
 	

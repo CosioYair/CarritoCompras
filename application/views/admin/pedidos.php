@@ -13,34 +13,42 @@
 		<!-- Info boxes -->
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
-				<table id="table_pedidos" class="table table-striped table-dark table_pedidos">
+				<table id="table_pedidos" class="table table-dark table_pedidos">
 				  <thead>
 				    <tr>
-				      <th scope="col">#</th>
-				      <th scope="col">First</th>
-				      <th scope="col">Last</th>
-				      <th scope="col">Handle</th>
+				      <th scope="col">Numero de pedido</th>
+				      <th scope="col">Cliente</th>
+				      <th scope="col">Empleado</th>
+				      <th scope="col">Prodcuto</th>
+				      <th scope="col">Cantidad</th>
+				      <th scope="col">Precio</th>
+				      <th scope="col">Fecha de entrega</th>
+				      <th scope="col">Acciones</th>
 				    </tr>
 				  </thead>
 				  <tbody>
-				    <tr>
-				      <th scope="row">1</th>
+				  <?php
+				  	$pedido = $pedidos[0]['id_pedido']; 
+				  	foreach ($pedidos as $key => $value) { 
+				  		if ($pedido == $value['id_pedido']) {
+				  ?>
+				  	<tr>
+				  <?php else{ ?>
+				  	<tr style="background-color: blue;">
+				  <?php }?>
+				      <th scope="row"><?php echo $i; ?></th>
 				      <td>Mark</td>
 				      <td>Otto</td>
 				      <td>@mdo</td>
+				      <td>@mdo</td>
+				      <td>@mdo</td>
+				      <td>@mdo</td>
+				      <td>
+				      	<i class="fa fa-trash btn btn-default" aria-hidden="true"></i>
+				      	<i class="fa fa-pencil btn btn-default" aria-hidden="true"></i>
+				      </td>
 				    </tr>
-				    <tr>
-				      <th scope="row">2</th>
-				      <td>Jacob</td>
-				      <td>Thornton</td>
-				      <td>@fat</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td>Larry</td>
-				      <td>the Bird</td>
-				      <td>@twitter</td>
-				    </tr>
+				   <?php } ?>
 				  </tbody>
 				</table>
 			</div>
