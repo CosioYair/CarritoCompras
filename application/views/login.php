@@ -93,6 +93,6 @@ span.psw {
 <!--===============================================================================================-->
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
-	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/general-scripts.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>build/bundle.js"></script>
 </body>
 </html>
