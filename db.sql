@@ -72,3 +72,4 @@ direccion varchar(100) not null,
 telefono varchar(20) not null,
 creacion timestamp default now()
 );
+ALTER TABLE pedido2cliente ADD precio_elegido_venta varchar(80) not null;
