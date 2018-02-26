@@ -6,7 +6,6 @@ module.exports = {
   entry: {
     app: [
       `${assetPath}/general-scripts.js`,
-      `${assetPath}/vueModules/form.js`,
     ]
   },
   output: {
