@@ -1,34 +1,16 @@
-$(function(){
-  var app = new Vue({
-    el: '#app',
-    data: {
-      login: {
-        prop: {
-          errorMessage: "Usuario o contrasena invalida"
-        },
-        method: {
+var form = require('./vueModules/form.js');
+var login = require('./vueModules/login.js');
+var cart = require('./vueModules/cart.js');
+var products = require('./vueModules/products.js');
+var app = new Vue({
+  el: '#app',
+  data: {
+    login:    login,
+    cart:     cart,
+    products: products,
+    form:     form
+  },
+  methods: {
 
-        }
-      },
-      cart: {
-        prop: {
-
-        },
-        method: {
-
-        }
-      },
-      products: {
-        prop: {
-
-        },
-        method: {
-
-        }
-      },
-    },
-    methods: {
-
-    }
-  });
+  }
 });

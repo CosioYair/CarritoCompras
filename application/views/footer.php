@@ -8,6 +8,7 @@
 
 				<div>
 					<p class="s-text7 w-size27">
+            {{ form.prop.errorMessage }}
 						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
 					</p>
 
@@ -207,7 +208,7 @@
 <!--===============================================================================================-->
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/vue.js"></script>
 <!--===============================================================================================-->
-	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/general-scripts.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>build/bundle.js"></script>
 	<script type="text/javascript">
 		$('.block2-btn-addcart').each(function(){
 			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
