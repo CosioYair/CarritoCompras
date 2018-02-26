@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/dist/css/style_sckam.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/dist/css/skins/_all-skins.min.css">
@@ -53,7 +54,7 @@
     <!-- Logo -->
     <a href="<?php echo base_url("dashboard"); ?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b></b>FEC</span>
+      <span class="logo-mini"><b></b></span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>Admin</b></span>
     </a>
@@ -113,6 +114,41 @@
             <li <?php echo ($this->uri->segment(2) == "dashboard") ? 'class="active"' : ""; ?>><a href="<?php echo base_url("dashboard"); ?>"><i class="fa fa-circle-o"></i>Inicio</a></li>
             
           </ul>
+        </li>
+        <li <?php echo ($this->uri->segment(2) == "catCategorias") ? 'class="active"' : ""; ?>>
+          <a href="<?php echo base_url("Cart_admin/catCategorias"); ?>">
+            <i class="fa fa-list" aria-hidden="true"></i><span>Categorias</span>
+          </a>
+        </li>
+        <li <?php echo ($this->uri->segment(2) == "catNivel") ? 'class="active"' : ""; ?>>
+          <a href="<?php echo base_url("Cart_admin/catNivel"); ?>">
+            <i class="fa fa-list" aria-hidden="true"></i><span>Nivel</span>
+          </a>
+        </li>
+        <li <?php echo ($this->uri->segment(2) == "catSucursal") ? 'class="active"' : ""; ?>>
+          <a href="<?php echo base_url("Cart_admin/catSucursal"); ?>">
+            <i class="fa fa-list" aria-hidden="true"></i><span>Sucursales</span>
+          </a>
+        </li>
+        <li <?php echo ($this->uri->segment(2) == "catUsuarios") ? 'class="active"' : ""; ?>>
+          <a href="<?php echo base_url("Cart_admin/catUsuarios"); ?>">
+            <i class="fa fa-list" aria-hidden="true"></i><span>Usuarios</span>
+          </a>
+        </li>
+        <li <?php echo ($this->uri->segment(2) == "catProvedores") ? 'class="active"' : ""; ?>>
+          <a href="<?php echo base_url("Cart_admin/catProvedores"); ?>">
+            <i class="fa fa-list" aria-hidden="true"></i><span>Provedores</span>
+          </a>
+        </li>
+        <li <?php echo ($this->uri->segment(2) == "catProductos") ? 'class="active"' : ""; ?>>
+          <a href="<?php echo base_url("Cart_admin/catProductos"); ?>">
+            <i class="fa fa-list" aria-hidden="true"></i><span>Productos</span>
+          </a>
+        </li>
+        <li <?php echo ($this->uri->segment(2) == "pedidos") ? 'class="active"' : ""; ?>>
+          <a href="<?php echo base_url("pedidos"); ?>">
+            <i class="fa fa-list" aria-hidden="true"></i><span>Pedidos</span>
+          </a>
         </li>
         <li>
           <a href="<?php echo base_url("logout"); ?>">

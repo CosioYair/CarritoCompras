@@ -29,14 +29,19 @@ class Vinos_model extends CI_Model  {
 		}
 	}
 
-	public function getLimite($id){
-		$this->db->select('count(*) as total');
-		$this->db->from('registro_ac');
-		$this->db->where("dependencia",$id);
+	public function getPedidos(){
+		$this->db->select('pedido2cliente.*,pedido.*,productos.nombre,productos.codigo,productos.nombre,usuarios.nombre_completo, u.nombre_completo as empleado_vendio');
+		$this->db->from('pedido2cliente');
+		$this->db->join('pedido', 'pedido.id_pedido = pedido2cliente.id_pedido');
+		$this->db->join('productos', 'productos.id_producto = pedido2cliente.id_producto');
+		$this->db->join('usuarios', 'usuarios.id_usuario = pedido.id_usuario_compra');
+		$this->db->join('usuarios as u', 'u.id_usuario = pedido.id_usuario_venta');
+		//$this->db->group_by("pedido2cliente.id_pedido");
+		$this->db->order_by('pedido2cliente.creacion', 'ASC');
 		$query = $this->db->get();
-		$row = $query->row();
+		$row = $query->result_array();
+
 		return $row;
 	}
-
 	
 }
