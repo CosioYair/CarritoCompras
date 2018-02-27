@@ -11,4 +11,11 @@ class Login extends CI_Controller {
 	public function index(){
 		$this->load->view('login');
 	}
+
+  public function loginUser(){
+    $email = $this->input->post('email');
+    $password = $this->input->post('password');
+    $user = $this->Vinos_model->getUser($email,$password);
+    echo json_encode($user);
+  }
 }
