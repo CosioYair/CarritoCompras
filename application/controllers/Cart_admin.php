@@ -120,40 +120,7 @@ class Cart_admin extends CI_Controller {
 		$this->load->view('admin/' . $view, $data);
 		$this->load->view('admin/footer');	
 	}
-	/*Users metodo para verificar si es usuario*/
-	private function isUser($redirect = true, $admin = false) {
-		//die(var_dump($_SESSION));
-		if(isset($_SESSION['id'])) {
-			$id_admin = $_SESSION['id'];
-			$user = $this->Vinos_model->getUser($_SESSION['id']);
-			//die(var_dump($user));
-			if ($user->tipo =='admin') {
-				if($user) {
-					return $user;
-					
-					if($redirect) {
-						$this->outputDashboard('dashboard');
-					}
-					
-					return $user;
-				} else {
-					if($redirect) {
-						$this->load->view('login.php');
-					}
-					return false;
-				}
-			} elseif (isset($_SESSION['id']) || $_SESSION['tipo'] =="captu" || $_SESSION['tipo'] =="captu_servicio") {
-			
-			redirect('dashboard-del','refresh');
-			}
-		}else {
-			if($redirect) {
-				header('Location: ' . site_url(''));
-			}
-			
-			return false;
-		}
-	}
+	
 	public function test(){
 		die('sasasasas');
 	}

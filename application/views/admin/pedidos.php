@@ -28,27 +28,51 @@
 				  </thead>
 				  <tbody>
 				  <?php
-				  	$pedido = $pedidos[0]['id_pedido']; 
+				  if (!empty($pedidos)) {
+				  	$pedido = true;
+				  	$acciones = true; 
+				  	$temp=$pedidos[0]['id_pedido'];
 				  	foreach ($pedidos as $key => $value) { 
-				  		if ($pedido == $value['id_pedido']) {
+				  		if ($temp == $value['id_pedido']) {
+				  			$pedido = true;
+				  		}else{
+				  			$pedido = false;
+				  			$acciones=true;
+				  			$temp=$value['id_pedido'];
+				  		}	
+				  	  	if ($pedido){
 				  ?>
 				  	<tr>
-				  <?php else{ ?>
-				  	<tr style="background-color: blue;">
-				  <?php }?>
-				      <th scope="row"><?php echo $i; ?></th>
-				      <td>Mark</td>
-				      <td>Otto</td>
-				      <td>@mdo</td>
-				      <td>@mdo</td>
-				      <td>@mdo</td>
-				      <td>@mdo</td>
+				  <?php }else{ ?>
+				  	<tr style="background-color: #aacbff;">
+				  <?php }
+				  	if ($acciones) {
+				  ?>
+				      <th scope="row"><?php echo $value['id_pedido']; ?></th>
+				   <?php }else { ?>
+				   	  <th scope="row"></th>
+				    <?php } ?>
+				      <td><?php echo $value['nombre_completo']; ?></td>
+				      <td><?php echo $value['empleado_vendio']; ?></td>
+				      <td><?php echo $value['nombre']; ?></td>
+				      <td><?php echo $value['cantidad']; ?></td>
+				      <td><?php echo $value['precio_elegido_venta']; ?></td>
+				      <td><?php echo $value['cantidad']; ?></td>
+				      <?php
+				  		if ($acciones) {
+				 	  ?>
 				      <td>
-				      	<i class="fa fa-trash btn btn-default" aria-hidden="true"></i>
-				      	<i class="fa fa-pencil btn btn-default" aria-hidden="true"></i>
+				      	<a href="#"><i class="fa fa-trash btn btn-default" aria-hidden="true"></i></a>
+				      	<a href="#"><i class="fa fa-pencil btn btn-default" aria-hidden="true"></i></a>
+				      	<a href="#"><i class="fa fa-search btn btn-default" aria-hidden="true"></i></a>
 				      </td>
+				      <?php }else{echo "<td></td>"; } ?>
 				    </tr>
-				   <?php } ?>
+				   <?php 
+				   	$acciones=false;
+
+				   	} } 
+				   ?>
 				  </tbody>
 				</table>
 			</div>
