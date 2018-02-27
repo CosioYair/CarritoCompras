@@ -11,11 +11,8 @@ var login = {
 }
 
 function loginUser(){
-  axios.post('login/loginUser', {
-    email: login.prop.email,
-    password: login.prop.password
-  }).then(response => {
-    console.log(response.date);
+  $.post("login/loginUser",{email: login.prop.email}, function(result){
+    console.log(result)
   });
 }
 

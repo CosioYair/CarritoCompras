@@ -1828,11 +1828,8 @@ var login = {
 };
 
 function loginUser() {
-  _axios2.default.post('login/loginUser', {
-    email: login.prop.email,
-    password: login.prop.password
-  }).then(function (response) {
-    console.log(response.date);
+  $.post("login/loginUser", { email: login.prop.email }, function (result) {
+    console.log(result);
   });
 }
 

@@ -71,22 +71,20 @@ span.psw {
 <body>
 
 <div id="app">
-  <form action="/action_page.php">
-    <div class="imgcontainer">
-      <img src="http://bashooka.com/wp-content/uploads/2012/07/wine-logo-designs-2.png" alt="Avatar" class="avatar">
-    </div>
+  <div class="imgcontainer">
+    <img src="http://bashooka.com/wp-content/uploads/2012/07/wine-logo-designs-2.png" alt="Avatar" class="avatar">
+  </div>
 
-    <div class="container">
-      <label for="uname"><b>Usuario</b></label>
-      <input type="text" placeholder="Ingresa usuario" name="uname" required>
+  <div class="container">
+    <label for="uname"><b>Correo</b></label>
+    <input v-model="login.prop.email" type="text" placeholder="Ingresa correo" name="email" required>
 
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Ingresa contrasena" name="psw" required>
+    <label for="psw"><b>Password</b></label>
+    <input v-model="login.prop.password" type="password" placeholder="Ingresa contrasena" name="psw" required>
 
-      <label for="psw"><b>{{ login.prop.errorMessage }}</b></label>
-      <button type="submit">Login</button>
-    </div>
-  </form>
+    <label for="psw"><b>{{ login.prop.errorMessage }}</b></label>
+    <button @click="login.method.loginUser" type="button">Login</button>
+  </div>
 </div>
 <!--===============================================================================================-->
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/vue.js"></script>

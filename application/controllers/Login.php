@@ -16,6 +16,6 @@ class Login extends CI_Controller {
     $email = $this->input->post('email');
     $password = $this->input->post('password');
     $user = $this->Vinos_model->getUser($email,$password);
-    echo json_encode($user);
+    echo json_encode($_POST);
   }
 }
