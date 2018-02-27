@@ -72,6 +72,8 @@ direccion varchar(100) not null,
 telefono varchar(20) not null,
 creacion timestamp default now()
 );
+
 ALTER TABLE pedido ADD fecha_entrega TIMESTAMP default now();
 ALTER TABLE pedido2cliente ADD cantidad int(11) not null;
 ALTER TABLE pedido2cliente ADD precio_elegido_venta varchar(80) not null;
+ALTER TABLE pedido ADD descripcion text;
