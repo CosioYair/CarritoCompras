@@ -89,8 +89,8 @@
 
 				<!-- Header Icon -->
 				<div class="header-icons">
-					<a href="#" class="header-wrapicon1 dis-block">
-						<img src="<?php echo base_url(); ?>assets/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+					<a @click="login.method.logout" href="#" class="header-wrapicon1 dis-block">
+            Cerrar sesion
 					</a>
 
 					<span class="linedivide1"></span>
