@@ -40,4 +40,9 @@ class Login extends CI_Controller {
     );
     return $newUser;
   }
+
+  public function logout(){
+    $this->session->sess_destroy();
+    redirect("/home", "refresh");
+  }
 }
