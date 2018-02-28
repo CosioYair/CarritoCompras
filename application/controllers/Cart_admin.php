@@ -52,6 +52,7 @@ class Cart_admin extends Middleware {
 			$crud->field_type('creacion','invisible');
 			$crud->set_primary_key('productos','id_producto');
 			$crud->columns('nombre','descripcion','codigo','cantidad','id_sucursal','precio1','creacion');
+			$crud->set_field_upload('imagen_producto','assets/uploads/files');
 			$crud->set_relation('id_sucursal','sucursal','nombre');
 			$crud->set_relation('id_categoria','categoria','nombre');
 			$crud->set_relation('id_provedor','provedores','nombre');

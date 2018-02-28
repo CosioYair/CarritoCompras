@@ -63,6 +63,7 @@ class Vinos_model extends CI_Model  {
 		$this->db->join('sucursal','sucursal.id_sucursal = productos.id_sucursal');
 		$this->db->join('categoria','categoria.id_categoria = productos.id_categoria');
 		$this->db->join('provedores','provedores.id_provedor = productos.id_provedor');
+		$this->db->distinct('productos.codigo');
 		$query = $this->db->get();
 		return $query->result_array();
 	}
@@ -73,8 +74,39 @@ class Vinos_model extends CI_Model  {
 		return $query->result_array();
 	}
 
-	function updateProductosSucursal(){
-		
+	function updateProductosSucursal($update){
+		$this->db->select('cantidad');	
+		$this->db->from('productos');
+		$this->db->where('nombre', $update['productos']);
+		$this->db->where('id_sucursal', $update['suc_env']);
+		$query2 = $this->db->get();
+		$query2 = $query2->row();
+
+		$this->db->select('cantidad');	
+		$this->db->from('productos');
+		$this->db->where('nombre', $update['productos']);
+		$this->db->where('id_sucursal', $update['suc_rec']);
+		$query3 = $this->db->get();
+		$query3 = $query3->row();
+
+		if ($query2->cantidad >= $update['cantidad']) {
+			$cantidad = $query2->cantidad - $update['cantidad'];	
+			$cantidad2 = $query3->cantidad + $update['cantidad'];	
+			$data = array(
+	    	   'cantidad' => $cantidad
+	    	);
+			$this->db->where('nombre', $update['productos']);
+			$this->db->where('id_sucursal', $update['suc_env']);
+			$this->db->update('productos', $data); 
+			$data2 = array(
+	    	   'cantidad' => $cantidad2
+	    	);
+			$this->db->where('nombre', $update['productos']);
+			$this->db->where('id_sucursal', $update['suc_rec']);
+			$this->db->update('productos', $data2); 
+			return true;
+		}
+		return false;
 	}
 	
 }
