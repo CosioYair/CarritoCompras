@@ -22,4 +22,15 @@ class Cart extends Middleware {
 	public function home_view(){
 		$this->output('home',false);
 	}
+
+	public function getProductos(){
+		$data = $this->Vinos_model->getProductos();
+		if (!$data) {
+
+			$resp =  array("code"=>404,"message"=>"No se encontraron productos","response"=>false);	
+		}else{
+			$resp =  array("code"=>200,"message"=>"Productos encontrados con exito","response"=>$data);	
+		}
+		echo json_encode($resp);
+	}
 }

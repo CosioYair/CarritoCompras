@@ -55,5 +55,6 @@ $route['test'] = 'Cart_admin/test';
 $route['dashboard'] = 'Cart_admin/index';
 $route['categorias'] = 'Cart_admin/catCategorias';
 $route['pedidos'] = 'Cart_admin/getPedido';
+$route['moverProductos'] = 'Cart_admin/moverProductos';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

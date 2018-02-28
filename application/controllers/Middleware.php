@@ -11,7 +11,7 @@ class Middleware extends CI_Controller {
     $this->load->helper('url');
     $this->load->library('grocery_CRUD');
 
-		if(!isset($_SESSION['user_id']))
-      redirect("/", "refresh");
+		//if(!isset($_SESSION['user_id']))
+      //redirect("/", "refresh");
   }
 }

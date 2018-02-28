@@ -114,7 +114,15 @@ class Cart_admin extends Middleware {
 		$this->load->view('admin/' . $view, $data);
 		$this->load->view('admin/footer');
 	}
-
+	public function moverProductos(){
+		$data['productos'] = $this->Vinos_model->getProductos();
+		$data['sucursal'] =$this->Vinos_model->getSucursales();
+		$this->outputDashboard('moverProductos',$data);
+	}
+	public function updateProductosDeSucursal(){
+		$data =$this->Vinos_model->getSucursales($_POST);
+		
+	}
 	public function test(){
 		die('sasasasas');
 	}
