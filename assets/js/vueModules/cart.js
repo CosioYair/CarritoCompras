@@ -10,6 +10,7 @@ var cart = {
     saveProductsSession: saveProductsSession,
     getProductsSession: getProductsSession,
     plusOne: plusOne,
+    subtractOne: subtractOne,
     updateCart: updateCart,
   }
 }
@@ -53,6 +54,12 @@ function getProductsSession(){
 function plusOne(index){
   cart.prop.productsCart[index].cantidadCarrito++;
   cart.prop.productsCart[index].cantidadPrecioCarrito = parseInt(cart.prop.productsCart[index].cantidadPrecioCarrito) + parseInt(cart.prop.productsCart[index].precio);
+  cart.method.updateCart();
+}
+
+function subtractOne(index){
+  cart.prop.productsCart[index].cantidadCarrito--;
+  cart.prop.productsCart[index].cantidadPrecioCarrito = parseInt(cart.prop.productsCart[index].cantidadPrecioCarrito) - parseInt(cart.prop.productsCart[index].precio);
   cart.method.updateCart();
 }
 

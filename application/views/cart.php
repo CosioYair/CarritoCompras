@@ -22,7 +22,7 @@
 							<td class="column-3">${{ product.precio }}</td>
 							<td class="column-4">
 								<div class="flex-w bo5 of-hidden w-size17">
-									<button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
+									<button @click="cart.method.subtractOne(index)" class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
 										<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
 									</button>
 
