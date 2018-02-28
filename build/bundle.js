@@ -219,9 +219,11 @@ function plusOne(index) {
 }
 
 function subtractOne(index) {
-  cart.prop.productsCart[index].cantidadCarrito--;
-  cart.prop.productsCart[index].cantidadPrecioCarrito = parseInt(cart.prop.productsCart[index].cantidadPrecioCarrito) - parseInt(cart.prop.productsCart[index].precio);
-  cart.method.updateCart();
+  if (cart.prop.productsCart[index].cantidadCarrito > 1) {
+    cart.prop.productsCart[index].cantidadCarrito--;
+    cart.prop.productsCart[index].cantidadPrecioCarrito = parseInt(cart.prop.productsCart[index].cantidadPrecioCarrito) - parseInt(cart.prop.productsCart[index].precio);
+    cart.method.updateCart();
+  }
 }
 
 function updateCart() {
