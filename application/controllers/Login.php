@@ -10,8 +10,12 @@ class Login extends CI_Controller {
   }
 
 	public function index(){
-		if(isset($_SESSION['user']))
-      redirect("/home", "refresh");
+    if(isset($_SESSION['user'])){
+      if($_SESSION['user']->id_nivel == 2)
+        redirect("/dashboard", "refresh");
+      else
+        redirect("/home", "refresh");
+    }
     else
       $this->load->view('login');
 	}
