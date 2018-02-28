@@ -96,7 +96,8 @@ var login = {
     password: ''
   },
   method: {
-    loginUser: loginUser
+    loginUser: loginUser,
+    logout: logout
   }
 };
 
@@ -110,6 +111,11 @@ function loginUser() {
       if (result.empleado == 2) window.location.replace('dashboard');else window.location.replace('home');
     }
   });
+}
+
+function logout() {
+  $.get("middleware/deleteSessionVariables");
+  window.location.reload();
 }
 
 module.exports = login;

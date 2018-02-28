@@ -6,7 +6,8 @@ var login = {
     password: ''
   },
   method: {
-    loginUser: loginUser
+    loginUser: loginUser,
+    logout: logout
   }
 }
 
@@ -25,6 +26,11 @@ function loginUser(){
         window.location.replace('home');
     }
   });
+}
+
+function logout(){
+  $.get("middleware/deleteSessionVariables");
+  window.location.reload();
 }
 
 module.exports = login;
