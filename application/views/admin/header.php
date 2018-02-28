@@ -64,26 +64,6 @@
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
-
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo base_url(); ?>assets/admin/dist/img/avatar-ninja.png" class="user-image" alt="User Image">
-              <span class="hidden-xs"><?php echo 'nombre';?></span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-right">
-                  <a href="<?php echo base_url("logout"); ?>" class="btn btn-default btn-flat">Cerrar Sesion</a>
-                </div>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
     </nav>
   </header>
 <!-- Left side column. contains the logo and sidebar -->
@@ -112,7 +92,7 @@
           </a>
           <ul class="treeview-menu">
             <li <?php echo ($this->uri->segment(2) == "dashboard") ? 'class="active"' : ""; ?>><a href="<?php echo base_url("dashboard"); ?>"><i class="fa fa-circle-o"></i>Inicio</a></li>
-            
+
           </ul>
         </li>
         <li <?php echo ($this->uri->segment(2) == "catCategorias") ? 'class="active"' : ""; ?>>
@@ -156,7 +136,7 @@
           </a>
         </li>
         <li>
-          <a href="<?php echo base_url("logout"); ?>">
+          <a href="<?php echo base_url("login/logout"); ?>">
             <i class="fa fa-sign-out"></i> <span>Cerrar sesión</span>
           </a>
         </li>

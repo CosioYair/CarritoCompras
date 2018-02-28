@@ -7,10 +7,14 @@ class Cart_admin extends Middleware {
 	public function __construct() {
     parent::__construct();
     $this->load->model('Vinos_model');
+    if(isset($_SESSION['user'])){
+      if($_SESSION['user']->empleado != 2)
+        redirect("/home", "refresh");
+    }
   }
 
 	public function index(){
-		$this->outputDashboard('dashboard',false);
+    $this->outputDashboard('dashboard',false);
 	}
 
 	public function catCategorias(){
