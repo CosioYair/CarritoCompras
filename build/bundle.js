@@ -177,6 +177,8 @@ function addToCart(product) {
   if (cart.prop.productsCart.findIndex(function (i) {
     return i.codigo === product.codigo;
   }) < 0) {
+    product.cantidadCarrito = 1;
+    product.cantidadPrecioCarrito = parseInt(product.precio);
     cart.prop.productsCart.push(product);
     cart.method.calculateSubtotal();
     cart.method.saveProductsSession();
