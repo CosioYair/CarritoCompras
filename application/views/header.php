@@ -43,7 +43,7 @@
 		<div class="container-menu-header">
 			<div class="wrap_header">
 				<!-- Logo -->
-				<a href="index.html" class="logo">
+				<a href="home" class="logo">
 					<img src="<?php echo base_url(); ?>assets/images/icons/logo.png" alt="IMG-LOGO">
 				</a>
 
@@ -126,7 +126,7 @@
 							<div class="header-cart-buttons">
 								<div class="header-cart-wrapbtn" style="margin: auto">
 									<!-- Button -->
-									<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									<a href="cart" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 									  Ver carrito
 									</a>
 								</div>
