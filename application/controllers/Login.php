@@ -10,7 +10,10 @@ class Login extends CI_Controller {
   }
 
 	public function index(){
-		$this->load->view('login');
+		if(isset($_SESSION['user']))
+      redirect("/home", "refresh");
+    else
+      $this->load->view('login');
 	}
 
   public function loginUser(){
