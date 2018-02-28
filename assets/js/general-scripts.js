@@ -6,7 +6,7 @@ var app = new Vue({
   el: '#app',
   created() {
     this.products.method.getProducts();
-    this.cart.method.calculateSubtotal();
+    this.cart.method.getProductsSession();
   },
   data: {
     login:    login,

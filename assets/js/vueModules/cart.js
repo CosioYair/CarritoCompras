@@ -7,7 +7,8 @@ var cart = {
     addToCart: addToCart,
     removeToCart: removeToCart,
     calculateSubtotal: calculateSubtotal,
-    saveProductsSession: saveProductsSession
+    saveProductsSession: saveProductsSession,
+    getProductsSession: getProductsSession
   }
 }
 
@@ -37,6 +38,13 @@ function saveProductsSession(){
     productsCart: cart.prop.productsCart
   }, result => {
 
+  });
+}
+
+function getProductsSession(){
+  $.get("cart/getProductsSession", result => {
+    cart.prop.productsCart = result;
+    cart.method.calculateSubtotal();
   });
 }
 

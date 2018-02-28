@@ -43,4 +43,9 @@ class Cart extends Middleware {
     $this->session->set_userdata('productsCart', $productsCart );
     echo json_encode($productsCart );
 	}
+
+	public function getProductsSession(){
+    header('Content-Type: application/json');
+    echo json_encode($_SESSION["productsCart"]);
+	}
 }

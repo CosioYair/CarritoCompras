@@ -85,7 +85,7 @@ var app = new Vue({
   el: '#app',
   created: function created() {
     this.products.method.getProducts();
-    this.cart.method.calculateSubtotal();
+    this.cart.method.getProductsSession();
   },
 
   data: {
@@ -168,7 +168,8 @@ var cart = {
     addToCart: addToCart,
     removeToCart: removeToCart,
     calculateSubtotal: calculateSubtotal,
-    saveProductsSession: saveProductsSession
+    saveProductsSession: saveProductsSession,
+    getProductsSession: getProductsSession
   }
 };
 
@@ -199,6 +200,13 @@ function saveProductsSession() {
   $.post("cart/saveProductsSession", {
     productsCart: cart.prop.productsCart
   }, function (result) {});
+}
+
+function getProductsSession() {
+  $.get("cart/getProductsSession", function (result) {
+    cart.prop.productsCart = result;
+    cart.method.calculateSubtotal();
+  });
 }
 
 module.exports = cart;
