@@ -26,7 +26,7 @@
 					    <label for="productos">Productos</label>
 					    <select class="form-control" id="productos" required>
 					     	<?php foreach ($productos as $key => $value) {?>
-					      <option value="<?php echo $value['id_producto']; ?>"><?php echo $value['nombre']; ?></option>
+					      <option value="<?php echo $value['nombre']; ?>"><?php echo $value['nombre']; ?></option>
 					    <?php }?>
 					    </select>
 					</div>
@@ -51,15 +51,23 @@
 <!-- /.content-wrapper -->
 <script>
 	$("#subm").click(function(){
-    $.post("Cart_admin/updateProductosDeSucursal",
-    {
-       suc_env :   $("#sucursal_envia").val(),
-       productos :   $("#productos").val(),
-       cantidad :   $("#cantidad").val(),
-       suc_rec :   $("#sucursal_recibe").val()
-    },
-    function(result){
-        console.log(result);
-    });
-});
+		if ($("#sucursal_envia").val() != $("#sucursal_recibe").val()){
+			$.post("Cart_admin/updateProductosDeSucursal",{
+			    suc_env :   $("#sucursal_envia").val(),
+			    productos :   $("#productos").val(),
+			    cantidad :   $("#cantidad").val(),
+			    suc_rec :   $("#sucursal_recibe").val()
+			},
+			function(result){
+			    console.log(result);
+			    if (result== "true"){
+			    	alert('Producto cambiado con exito');
+			    }else{
+			    	alert('Ocurrio un error, verifica los datos de llenado');
+			    }
+			});
+		}else{
+			alert('No puedes mover productos a la misma sucursal');
+		}
+	});
 </script>
