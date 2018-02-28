@@ -186,6 +186,7 @@ function removeToCart(index) {
 }
 
 function calculateSubtotal() {
+  cart.prop.subtotal = 0;
   cart.prop.productsCart.map(function (product) {
     cart.prop.subtotal += parseInt(product.precio);
   });

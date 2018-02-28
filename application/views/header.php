@@ -113,7 +113,7 @@
 										</a>
 
 										<span class="header-cart-item-info">
-											1 x $19.00
+											1 x ${{ product.precio }}
 										</span>
 									</div>
 								</li>
