@@ -28,7 +28,7 @@
 
 									<input class="size8 m-text18 t-center num-product" type="number" name="num-product2" :value="product.cantidadCarrito">
 
-									<button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
+									<button @click="cart.method.plusOne(index)" class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
 										<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
 									</button>
 								</div>
