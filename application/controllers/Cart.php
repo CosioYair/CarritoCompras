@@ -27,6 +27,10 @@ class Cart extends Middleware {
     $this->output('home',false);
 	}
 
+	public function cart_view(){
+    $this->output('cart',false);
+	}
+
 	public function getProductos(){
 		$data = $this->Vinos_model->getProductos();
 		if(!$data) {
