@@ -29,12 +29,12 @@ class Cart extends Middleware {
 
 	public function getProductos(){
 		$data = $this->Vinos_model->getProductos();
-		if (!$data) {
-
-			$resp =  array("code"=>404,"message"=>"No se encontraron productos","response"=>false);	
+		if(!$data) {
+			$resp =  array("code"=>404,"message"=>"No se encontraron productos","response"=>false);
 		}else{
-			$resp =  array("code"=>200,"message"=>"Productos encontrados con exito","response"=>$data);	
+			$resp =  array("code"=>200,"message"=>"Productos encontrados con exito","response"=>$data);
 		}
+    header('Content-Type: application/json');
 		echo json_encode($resp);
 	}
 }
