@@ -120,8 +120,8 @@ class Cart_admin extends Middleware {
 		$this->outputDashboard('moverProductos',$data);
 	}
 	public function updateProductosDeSucursal(){
-		$data =$this->Vinos_model->getSucursales($_POST);
-		
+		$data =$this->Vinos_model->updateProductosSucursal($_POST);
+		echo json_encode($data);
 	}
 	public function test(){
 		die('sasasasas');
