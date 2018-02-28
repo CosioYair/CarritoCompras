@@ -10,7 +10,12 @@ class Cart_admin extends Middleware {
   }
 
 	public function index(){
-		$this->outputDashboard('dashboard',false);
+    if(isset($_SESSION['user'])){
+      if($_SESSION['user']->id_nivel != 2)
+        redirect("/home", "refresh");
+    }
+    else
+      $this->outputDashboard('dashboard',false);
 	}
 
 	public function catCategorias(){
