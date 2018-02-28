@@ -45,7 +45,7 @@ class Vinos_model extends CI_Model  {
 	}
 
   public function getUser($email,$pwd) {
-    $query = $this->db->get_where('usuarios', array('correo' => $email,'password'=>$pwd));
+    $query = $this->db->get_where('usuarios', array('correo' => $email,'password'=>md5($pwd)));
     $row   = $query->row();
     return $row;
   }
