@@ -167,7 +167,8 @@ var cart = {
   method: {
     addToCart: addToCart,
     removeToCart: removeToCart,
-    calculateSubtotal: calculateSubtotal
+    calculateSubtotal: calculateSubtotal,
+    saveProductsSession: saveProductsSession
   }
 };
 
@@ -177,12 +178,14 @@ function addToCart(product) {
   }) < 0) {
     cart.prop.productsCart.push(product);
     cart.method.calculateSubtotal();
+    cart.method.saveProductsSession();
   }
 }
 
 function removeToCart(index) {
   cart.prop.productsCart.splice(index, 1);
   cart.method.calculateSubtotal();
+  cart.method.saveProductsSession();
 }
 
 function calculateSubtotal() {
@@ -190,6 +193,12 @@ function calculateSubtotal() {
   cart.prop.productsCart.map(function (product) {
     cart.prop.subtotal += parseInt(product.precio);
   });
+}
+
+function saveProductsSession() {
+  $.post("cart/saveProductsSession", {
+    productsCart: cart.prop.productsCart
+  }, function (result) {});
 }
 
 module.exports = cart;
