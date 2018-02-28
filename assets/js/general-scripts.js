@@ -4,6 +4,10 @@ var cart = require('./vueModules/cart.js');
 var products = require('./vueModules/products.js');
 var app = new Vue({
   el: '#app',
+  created() {
+    this.products.method.getProducts();
+    this.cart.method.getProductsSession();
+  },
   data: {
     login:    login,
     cart:     cart,

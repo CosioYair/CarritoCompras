@@ -60,12 +60,45 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
-/******/ ({
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
 
-/***/ 10:
+module.exports = __webpack_require__(1);
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var form = __webpack_require__(2);
+var login = __webpack_require__(3);
+var cart = __webpack_require__(4);
+var products = __webpack_require__(5);
+var app = new Vue({
+  el: '#app',
+  created: function created() {
+    this.products.method.getProducts();
+    this.cart.method.getProductsSession();
+  },
+
+  data: {
+    login: login,
+    cart: cart,
+    products: products,
+    form: form
+  },
+  methods: {}
+});
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -81,8 +114,7 @@ var form = {
 module.exports = form;
 
 /***/ }),
-
-/***/ 11:
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -121,66 +153,88 @@ function logout() {
 module.exports = login;
 
 /***/ }),
-
-/***/ 31:
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var cart = {
-  prop: {},
-  method: {}
+  prop: {
+    productsCart: [],
+    subtotal: 0
+  },
+  method: {
+    addToCart: addToCart,
+    removeToCart: removeToCart,
+    calculateSubtotal: calculateSubtotal,
+    saveProductsSession: saveProductsSession,
+    getProductsSession: getProductsSession
+  }
 };
+
+function addToCart(product) {
+  if (cart.prop.productsCart.findIndex(function (i) {
+    return i.codigo === product.codigo;
+  }) < 0) {
+    cart.prop.productsCart.push(product);
+    cart.method.calculateSubtotal();
+    cart.method.saveProductsSession();
+  }
+}
+
+function removeToCart(index) {
+  cart.prop.productsCart.splice(index, 1);
+  cart.method.calculateSubtotal();
+  cart.method.saveProductsSession();
+}
+
+function calculateSubtotal() {
+  cart.prop.subtotal = 0;
+  cart.prop.productsCart.map(function (product) {
+    cart.prop.subtotal += parseInt(product.precio);
+  });
+}
+
+function saveProductsSession() {
+  $.post("cart/saveProductsSession", {
+    productsCart: cart.prop.productsCart
+  }, function (result) {});
+}
+
+function getProductsSession() {
+  $.get("cart/getProductsSession", function (result) {
+    cart.prop.productsCart = result;
+    cart.method.calculateSubtotal();
+  });
+}
 
 module.exports = cart;
 
 /***/ }),
-
-/***/ 32:
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var products = {
-  prop: {},
-  method: {}
+  prop: {
+    productsHome: []
+  },
+  method: {
+    getProducts: getProducts
+  }
 };
+
+function getProducts() {
+  $.get("cart/getProductos", function (result) {
+    products.prop.productsHome = result.response;
+    console.log(products.prop.productsHome);
+  });
+}
 
 module.exports = products;
 
-/***/ }),
-
-/***/ 8:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(9);
-
-
-/***/ }),
-
-/***/ 9:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var form = __webpack_require__(10);
-var login = __webpack_require__(11);
-var cart = __webpack_require__(31);
-var products = __webpack_require__(32);
-var app = new Vue({
-  el: '#app',
-  data: {
-    login: login,
-    cart: cart,
-    products: products,
-    form: form
-  },
-  methods: {}
-});
-
 /***/ })
-
-/******/ });
+/******/ ]);
