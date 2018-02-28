@@ -106,9 +106,8 @@ function loginUser() {
     password: login.prop.password
   }, function (result) {
     console.log(result);
-    login.prop.showErrorMessage = true;
-    if (result == null) login.prop.showErrorMessage = true;else {
-      if (result.empleado == 2) window.location.replace('c/dashboard');else window.location.replace('c/home');
+    if (result == 'null') login.prop.showErrorMessage = true;else {
+      if (result.empleado == 2) window.location.replace('dashboard');else window.location.replace('home');
     }
   });
 }

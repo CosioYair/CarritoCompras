@@ -16,14 +16,13 @@ function loginUser(){
     password: login.prop.password
   }, result => {
     console.log(result);
-      login.prop.showErrorMessage = true;
-    if(result == null)
+    if(result == 'null')
       login.prop.showErrorMessage  = true;
     else{
       if(result.empleado == 2)
-        window.location.replace('c/dashboard');
+        window.location.replace('dashboard');
       else
-        window.location.replace('c/home');
+        window.location.replace('home');
     }
   });
 }

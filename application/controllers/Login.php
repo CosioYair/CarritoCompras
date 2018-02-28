@@ -23,4 +23,14 @@ class Login extends CI_Controller {
     }
     echo json_encode($user);
   }
+
+  public function setUserData($user){
+    $newUser = array(
+      "id_user" => $user->id_usuario,
+      "name" => $user->nombre_completo,
+      "id_level" => $user->id_nivel,
+      "employee" => $user->empleado
+    );
+    return $newUser;
+  }
 }
