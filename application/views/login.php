@@ -82,7 +82,7 @@ span.psw {
     <label for="psw"><b>Password</b></label>
     <input v-model="login.prop.password" type="password" placeholder="Ingresa contrasena" name="psw" required>
 
-    <label for="psw"><b>{{ login.prop.errorMessage }}</b></label>
+    <label v-if="login.prop.showErrorMessage" for="psw"><b>{{ login.prop.errorMessage }}</b></label>
     <button @click="login.method.loginUser" type="button">Login</button>
   </div>
 </div>

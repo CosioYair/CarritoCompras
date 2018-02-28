@@ -14,4 +14,12 @@ class Middleware extends CI_Controller {
 		if(!isset($_SESSION['user_id']))
       redirect("/", "refresh");
   }
+
+  public function getAllSessionVariables(){
+    echo json_encode($this->session->all_userdata());
+  }
+
+  public function deleteSessionVariables(){
+    $this->session->sess_destroy();
+  }
 }

@@ -5,6 +5,7 @@ class Login extends CI_Controller {
 
 	public function __construct() {
     parent::__construct();
+    $this->load->library('session');
     $this->load->model('Vinos_model');
   }
 
@@ -16,6 +17,10 @@ class Login extends CI_Controller {
     $email = $this->input->post('email');
     $password = $this->input->post('password');
     $user = $this->Vinos_model->getUser($email,$password);
-    echo json_encode($_POST);
+    if($user != null){
+      $user->password = "";
+      $this->session->set_userdata('user', $user);
+    }
+    echo json_encode($user);
   }
 }
