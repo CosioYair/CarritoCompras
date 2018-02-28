@@ -29,7 +29,7 @@ class Vinos_model extends CI_Model  {
 		}
 	}
 
-	public function getPedidos(){
+	function getPedidos(){
 		$this->db->select('pedido2cliente.*,pedido.*,productos.nombre,productos.codigo,productos.nombre,usuarios.nombre_completo, u.nombre_completo as empleado_vendio');
 		$this->db->from('pedido2cliente');
 		$this->db->join('pedido', 'pedido.id_pedido = pedido2cliente.id_pedido');
@@ -49,4 +49,32 @@ class Vinos_model extends CI_Model  {
     $row   = $query->row();
     return $row;
   }
+	function getProductos(){
+		if ($this->session->userdata('nivel') == 1) {
+		$this->db->select('productos.*,sucursal.nombre as sucursal, categoria.nombre as categoria,productos.precio1 as precio');	
+		}elseif ($this->session->userdata('nivel') == 2) {
+			$this->db->select('productos.*,sucursal.nombre as sucursal, categoria.nombre as categoria,productos.precio2 as precio');
+		}elseif ($this->session->userdata('nivel') == 3) {
+			$this->db->select('productos.*,sucursal.nombre as sucursal, categoria.nombre as categoria,productos.precio3 as precio');
+		}else{
+			$this->db->select('productos.*,sucursal.nombre as sucursal, categoria.nombre as categoria,productos.precio1 as precio');
+		}
+		$this->db->from('productos');
+		$this->db->join('sucursal','sucursal.id_sucursal = productos.id_sucursal');
+		$this->db->join('categoria','categoria.id_categoria = productos.id_categoria');
+		$this->db->join('provedores','provedores.id_provedor = productos.id_provedor');
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+	function getSucursales(){
+		$this->db->select('*');	
+		$this->db->from('sucursal');
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	function updateProductosSucursal(){
+		
+	}
+	
 }

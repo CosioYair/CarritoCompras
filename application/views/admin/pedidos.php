@@ -29,6 +29,7 @@
 				  <tbody>
 				  <?php
 				  if (!empty($pedidos)) {
+				  
 				  	$pedido = true;
 				  	$acciones = true; 
 				  	$temp=$pedidos[0]['id_pedido'];
@@ -57,7 +58,7 @@
 				      <td><?php echo $value['nombre']; ?></td>
 				      <td><?php echo $value['cantidad']; ?></td>
 				      <td><?php echo $value['precio_elegido_venta']; ?></td>
-				      <td><?php echo $value['cantidad']; ?></td>
+				      <td><?php echo $value['fecha_entrega']; ?></td>
 				      <?php
 				  		if ($acciones) {
 				 	  ?>
@@ -70,7 +71,6 @@
 				    </tr>
 				   <?php 
 				   	$acciones=false;
-
 				   	} } 
 				   ?>
 				  </tbody>

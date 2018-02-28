@@ -13,6 +13,7 @@ class Middleware extends CI_Controller {
 
 		if(!isset($_SESSION['user']))
       redirect("/", "refresh");
+
   }
 
   public function getAllSessionVariables(){

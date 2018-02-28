@@ -130,6 +130,11 @@
             <i class="fa fa-list" aria-hidden="true"></i><span>Pedidos</span>
           </a>
         </li>
+        <li <?php echo ($this->uri->segment(2) == "moverProductos") ? 'class="active"' : ""; ?>>
+          <a href="<?php echo base_url("moverProductos"); ?>">
+            <i class="fa fa-list" aria-hidden="true"></i><span>Mover productos de sucursal</span>
+          </a>
+        </li>
         <li>
           <a href="<?php echo base_url("login/logout"); ?>">
             <i class="fa fa-sign-out"></i> <span>Cerrar sesión</span>
