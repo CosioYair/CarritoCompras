@@ -72,4 +72,19 @@ class Cart extends Middleware {
     header('Content-Type: application/json');
     echo json_encode($_SESSION["productsCart"]);
 	}
+
+	public function regPedido(){
+		$data = $this->Vinos_model->insertPedido();
+		if(!$data) {
+			$resp =  array("code"=>404,"message"=>"Ocurrio un error durante el registro del pedido","response"=>false);
+		}else{
+			$resp =  array("code"=>200,"message"=>"Pedido registrado con exito","response"=>$data);
+		}
+    	header('Content-Type: application/json');
+		echo json_encode($resp);
+	}
+	public function test(){
+		$u = $this->session->userdata('productsCart');
+		die(var_dump($u));
+	}
 }

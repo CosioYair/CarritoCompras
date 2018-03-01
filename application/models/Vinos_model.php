@@ -50,11 +50,12 @@ class Vinos_model extends CI_Model  {
     return $row;
   }
 	function getProductos(){
-		if ($this->session->userdata('nivel') == 1) {
+			$user = $this->session->userdata('user');
+		if ($user->id_nivel == 1) {
 		$this->db->select('productos.*,sucursal.nombre as sucursal, categoria.nombre as categoria,productos.precio1 as precio');	
-		}elseif ($this->session->userdata('nivel') == 2) {
+		}elseif ($user->id_nivel == 2) {
 			$this->db->select('productos.*,sucursal.nombre as sucursal, categoria.nombre as categoria,productos.precio2 as precio');
-		}elseif ($this->session->userdata('nivel') == 3) {
+		}elseif ($user->id_nivel == 3) {
 			$this->db->select('productos.*,sucursal.nombre as sucursal, categoria.nombre as categoria,productos.precio3 as precio');
 		}else{
 			$this->db->select('productos.*,sucursal.nombre as sucursal, categoria.nombre as categoria,productos.precio1 as precio');
@@ -63,6 +64,9 @@ class Vinos_model extends CI_Model  {
 		$this->db->join('sucursal','sucursal.id_sucursal = productos.id_sucursal');
 		$this->db->join('categoria','categoria.id_categoria = productos.id_categoria');
 		$this->db->join('provedores','provedores.id_provedor = productos.id_provedor');
+		if ($user->empleado == 0) {
+			$this->db->where('productos.id_sucursal', $user->id_sucursal);
+		}
 		$this->db->distinct('productos.codigo');
 		$query = $this->db->get();
 		return $query->result_array();
@@ -132,6 +136,51 @@ class Vinos_model extends CI_Model  {
 			}
 		}
 		return false;
+	}
+
+	function insertPedido(){
+		$usuario = $this->session->userdata('user');
+		$descuento = $this->session->userdata('descuento');
+		if ($usuario->empleado == 0) {
+		$pedido = array(
+			'id_sucursal' => 0000,
+			'id_usuario_compra' => $usuario->id_usuario,
+			'id_usuario_venta' => 0000,
+			'descuento' => 0,
+			'estatus' => "En proceso de creacion",
+			'descripcion' => $descripcion,
+			'fecha_entrega' =>$fecha_entrega 
+		);
+		}else{
+		$pedido = array(
+			'id_sucursal' => 0000,
+			'id_usuario_compra' => 0000,
+			'id_usuario_venta' => $usuario->id_usuario,
+			'descuento' => $descuento,
+			'estatus' => "En proceso de creacion",
+			'descripcion' => $descripcion,
+			'fecha_entrega' => $fecha_entrega
+		);
+		}
+		$this->db->insert('pedido', $pedido);
+		$insert_id = $this->db->insert_id();
+		$this->regPedido($insert_id,$descuento); 
+		return true;
+	}
+
+	function regPedido($id,$descuento){
+		$productsCart = $this->session->userdata('productsCart');
+		foreach ($productsCart as $key => $value) {
+			$pedido = array(
+				'id_pedido' => $id,
+				'id_producto' => $value['id_producto'],
+				'descuento' => $descuento,
+				'precio_elegido_venta' => $value['cantidadPrecioCarrito'],
+				'cantidad' => $value['cantidadCarrito']
+			);
+			$this->db->insert('pedido2cliente', $pedido);
+		}
+		return true;
 	}
 	
 }
