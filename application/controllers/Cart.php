@@ -55,6 +55,19 @@ class Cart extends Middleware {
     echo json_encode($productsCart );
 	}
 
+	public function saveDiscount(){
+    $discount = intval($this->input->post('discount'));
+    $this->session->set_userdata('discount', $discount);
+	}
+
+	public function getDiscount(){
+    header('Content-Type: application/json');
+    if(isset($_SESSION['discount']))
+      echo $_SESSION['discount'];
+    else
+      echo 0;
+	}
+
 	public function getProductsSession(){
     header('Content-Type: application/json');
     echo json_encode($_SESSION["productsCart"]);

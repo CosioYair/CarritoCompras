@@ -16,6 +16,7 @@ var cart = {
     updateCart: updateCart,
     applyDiscount: applyDiscount,
     saveDiscount: saveDiscount,
+    getDiscount: getDiscount,
   }
 }
 
@@ -80,10 +81,17 @@ function applyDiscount(){
 }
 
 function saveDiscount(){
+  console.log(cart.prop.discount)
   $.post("cart/saveDiscount", {
     discount: cart.prop.discount
   }, result => {
 
+  });
+}
+
+function getDiscount(){
+  $.get("cart/getDiscount", result => {
+    cart.prop.discount = result;
   });
 }
 

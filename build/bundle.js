@@ -84,6 +84,7 @@ var products = __webpack_require__(5);
 var app = new Vue({
   el: '#app',
   created: function created() {
+    this.cart.method.getDiscount();
     this.login.method.getUser();
     this.products.method.getProducts();
     this.cart.method.getProductsSession();
@@ -185,7 +186,8 @@ var cart = {
     subtractOne: subtractOne,
     updateCart: updateCart,
     applyDiscount: applyDiscount,
-    saveDiscount: saveDiscount
+    saveDiscount: saveDiscount,
+    getDiscount: getDiscount
   }
 };
 
@@ -250,9 +252,16 @@ function applyDiscount() {
 }
 
 function saveDiscount() {
+  console.log(cart.prop.discount);
   $.post("cart/saveDiscount", {
     discount: cart.prop.discount
   }, function (result) {});
+}
+
+function getDiscount() {
+  $.get("cart/getDiscount", function (result) {
+    cart.prop.discount = result;
+  });
 }
 
 module.exports = cart;
