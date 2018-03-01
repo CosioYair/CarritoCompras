@@ -27,6 +27,10 @@ class Cart extends Middleware {
     $this->output('home',false);
 	}
 
+	public function cart_view(){
+    $this->output('cart',false);
+	}
+
 	public function getProductos(){
 		$data = $this->Vinos_model->getProductos();
 		if(!$data) {
@@ -40,7 +44,10 @@ class Cart extends Middleware {
 
 	public function saveProductsSession(){
     $productsCart = $this->input->post('productsCart');
-    $this->session->set_userdata('productsCart', $productsCart );
+    if($productsCart != null)
+      $this->session->set_userdata('productsCart', $productsCart );
+    else
+      $this->session->set_userdata('productsCart', array());
     echo json_encode($productsCart );
 	}
 
