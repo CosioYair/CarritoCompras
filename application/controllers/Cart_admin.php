@@ -95,6 +95,7 @@ class Cart_admin extends Middleware {
 			$crud->field_type('creacion','invisible');
 			$crud->set_primary_key('usuarios','id_usuario');
 			$crud->set_relation('id_nivel','nivel','tipo');
+			$crud->set_relation('id_sucursal','sucursal','nombre');
 			$crud->columns('nombre_completo','correo','id_nivel','empleado','creacion');
 			$crud->callback_before_insert(array($this,'md5_encrypt'));
 			$crud->callback_before_update(array($this,'md5_encrypt'));
@@ -129,7 +130,8 @@ class Cart_admin extends Middleware {
 		echo json_encode($data);
 	}
 	public function test(){
-		die('sasasasas');
+		$u = $this->session->userdata('user');
+		die(var_dump($u));
 	}
 
 }
