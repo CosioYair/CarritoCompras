@@ -15,6 +15,8 @@ var cart = {
     subtractOne: subtractOne,
     updateCart: updateCart,
     applyDiscount: applyDiscount,
+    saveDiscount: saveDiscount,
+    getDiscount: getDiscount,
   }
 }
 
@@ -76,6 +78,21 @@ function updateCart(){
 
 function applyDiscount(){
   cart.prop.subtotalDiscount = (cart.prop.subtotal * (100 - cart.prop.discount))/100;
+}
+
+function saveDiscount(){
+  console.log(cart.prop.discount)
+  $.post("cart/saveDiscount", {
+    discount: cart.prop.discount
+  }, result => {
+
+  });
+}
+
+function getDiscount(){
+  $.get("cart/getDiscount", result => {
+    cart.prop.discount = result;
+  });
 }
 
 module.exports = cart;

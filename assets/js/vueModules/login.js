@@ -3,11 +3,13 @@ var login = {
     showErrorMessage: false,
     errorMessage: "Usuario o contrasena invalida",
     email: '',
-    password: ''
+    password: '',
+    user: {}
   },
   method: {
     loginUser: loginUser,
-    logout: logout
+    logout: logout,
+    getUser: getUser
   }
 }
 
@@ -31,6 +33,12 @@ function loginUser(){
 function logout(){
   $.get("middleware/deleteSessionVariables");
   window.location.reload();
+}
+
+function getUser(){
+  $.get("login/getUser", result => {
+    login.prop.user = result;
+  });
 }
 
 module.exports = login;

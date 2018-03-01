@@ -45,4 +45,12 @@ class Login extends CI_Controller {
     $this->session->sess_destroy();
     redirect("/home", "refresh");
   }
+
+  public function getUser(){
+    header('Content-Type: application/json');
+    if(isset($_SESSION['user']))
+      echo json_encode($_SESSION['user']);
+    else
+      echo json_encode((object) array());
+  }
 }
