@@ -120,7 +120,7 @@
 							</ul>
 
 							<div class="header-cart-total">
-								Total: ${{ cart.prop.subtotal }}
+								Total: ${{ cart.prop.subtotalDiscount }}
 							</div>
 
 							<div class="header-cart-buttons">

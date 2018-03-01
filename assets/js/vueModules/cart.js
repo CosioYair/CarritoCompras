@@ -1,7 +1,9 @@
 var cart = {
   prop: {
     productsCart: [],
-    subtotal: 0
+    subtotal: 0,
+    subtotalDiscount: 0,
+    discount: 0
   },
   method: {
     addToCart: addToCart,
@@ -12,6 +14,7 @@ var cart = {
     plusOne: plusOne,
     subtractOne: subtractOne,
     updateCart: updateCart,
+    applyDiscount: applyDiscount,
   }
 }
 
@@ -34,6 +37,7 @@ function calculateSubtotal(){
   cart.prop.productsCart.map(product => {
     cart.prop.subtotal += parseInt(product.cantidadPrecioCarrito);
   });
+  cart.method.applyDiscount();
 }
 
 function saveProductsSession(){
@@ -68,6 +72,10 @@ function subtractOne(index){
 function updateCart(){
   cart.method.calculateSubtotal();
   cart.method.saveProductsSession();
+}
+
+function applyDiscount(){
+  cart.prop.subtotalDiscount = (cart.prop.subtotal * (100 - cart.prop.discount))/100;
 }
 
 module.exports = cart;
