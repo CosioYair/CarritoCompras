@@ -27,6 +27,14 @@ class Cart extends Middleware {
     $this->output('home',false);
 	}
 
+	public function cart_view(){
+    $this->output('cart',false);
+	}
+
+	public function checkout_view(){
+    $this->output('checkout',false);
+	}
+
 	public function getProductos(){
 		$data = $this->Vinos_model->getProductos();
 		if(!$data) {
@@ -40,8 +48,24 @@ class Cart extends Middleware {
 
 	public function saveProductsSession(){
     $productsCart = $this->input->post('productsCart');
-    $this->session->set_userdata('productsCart', $productsCart );
+    if($productsCart != null)
+      $this->session->set_userdata('productsCart', $productsCart );
+    else
+      $this->session->set_userdata('productsCart', array());
     echo json_encode($productsCart );
+	}
+
+	public function saveDiscount(){
+    $discount = intval($this->input->post('discount'));
+    $this->session->set_userdata('discount', $discount);
+	}
+
+	public function getDiscount(){
+    header('Content-Type: application/json');
+    if(isset($_SESSION['discount']))
+      echo $_SESSION['discount'];
+    else
+      echo 0;
 	}
 
 	public function getProductsSession(){

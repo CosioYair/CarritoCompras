@@ -84,6 +84,8 @@ var products = __webpack_require__(5);
 var app = new Vue({
   el: '#app',
   created: function created() {
+    this.cart.method.getDiscount();
+    this.login.method.getUser();
     this.products.method.getProducts();
     this.cart.method.getProductsSession();
   },
@@ -125,11 +127,13 @@ var login = {
     showErrorMessage: false,
     errorMessage: "Usuario o contrasena invalida",
     email: '',
-    password: ''
+    password: '',
+    user: {}
   },
   method: {
     loginUser: loginUser,
-    logout: logout
+    logout: logout,
+    getUser: getUser
   }
 };
 
@@ -150,6 +154,12 @@ function logout() {
   window.location.reload();
 }
 
+function getUser() {
+  $.get("login/getUser", function (result) {
+    login.prop.user = result;
+  });
+}
+
 module.exports = login;
 
 /***/ }),
@@ -162,14 +172,22 @@ module.exports = login;
 var cart = {
   prop: {
     productsCart: [],
-    subtotal: 0
+    subtotal: 0,
+    subtotalDiscount: 0,
+    discount: 0
   },
   method: {
     addToCart: addToCart,
     removeToCart: removeToCart,
     calculateSubtotal: calculateSubtotal,
     saveProductsSession: saveProductsSession,
-    getProductsSession: getProductsSession
+    getProductsSession: getProductsSession,
+    plusOne: plusOne,
+    subtractOne: subtractOne,
+    updateCart: updateCart,
+    applyDiscount: applyDiscount,
+    saveDiscount: saveDiscount,
+    getDiscount: getDiscount
   }
 };
 
@@ -177,23 +195,24 @@ function addToCart(product) {
   if (cart.prop.productsCart.findIndex(function (i) {
     return i.codigo === product.codigo;
   }) < 0) {
+    product.cantidadCarrito = 1;
+    product.cantidadPrecioCarrito = parseInt(product.precio);
     cart.prop.productsCart.push(product);
-    cart.method.calculateSubtotal();
-    cart.method.saveProductsSession();
+    cart.method.updateCart();
   }
 }
 
 function removeToCart(index) {
   cart.prop.productsCart.splice(index, 1);
-  cart.method.calculateSubtotal();
-  cart.method.saveProductsSession();
+  cart.method.updateCart();
 }
 
 function calculateSubtotal() {
   cart.prop.subtotal = 0;
   cart.prop.productsCart.map(function (product) {
-    cart.prop.subtotal += parseInt(product.precio);
+    cart.prop.subtotal += parseInt(product.cantidadPrecioCarrito);
   });
+  cart.method.applyDiscount();
 }
 
 function saveProductsSession() {
@@ -206,6 +225,42 @@ function getProductsSession() {
   $.get("cart/getProductsSession", function (result) {
     cart.prop.productsCart = result;
     cart.method.calculateSubtotal();
+  });
+}
+
+function plusOne(index) {
+  cart.prop.productsCart[index].cantidadCarrito++;
+  cart.prop.productsCart[index].cantidadPrecioCarrito = parseInt(cart.prop.productsCart[index].cantidadPrecioCarrito) + parseInt(cart.prop.productsCart[index].precio);
+  cart.method.updateCart();
+}
+
+function subtractOne(index) {
+  if (cart.prop.productsCart[index].cantidadCarrito > 1) {
+    cart.prop.productsCart[index].cantidadCarrito--;
+    cart.prop.productsCart[index].cantidadPrecioCarrito = parseInt(cart.prop.productsCart[index].cantidadPrecioCarrito) - parseInt(cart.prop.productsCart[index].precio);
+    cart.method.updateCart();
+  }
+}
+
+function updateCart() {
+  cart.method.calculateSubtotal();
+  cart.method.saveProductsSession();
+}
+
+function applyDiscount() {
+  cart.prop.subtotalDiscount = cart.prop.subtotal * (100 - cart.prop.discount) / 100;
+}
+
+function saveDiscount() {
+  console.log(cart.prop.discount);
+  $.post("cart/saveDiscount", {
+    discount: cart.prop.discount
+  }, function (result) {});
+}
+
+function getDiscount() {
+  $.get("cart/getDiscount", function (result) {
+    cart.prop.discount = result;
   });
 }
 
@@ -230,7 +285,6 @@ var products = {
 function getProducts() {
   $.get("cart/getProductos", function (result) {
     products.prop.productsHome = result.response;
-    console.log(products.prop.productsHome);
   });
 }
 

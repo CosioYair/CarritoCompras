@@ -10,7 +10,6 @@ var products = {
 function getProducts(){
   $.get("cart/getProductos", result => {
     products.prop.productsHome = result.response;
-    console.log(products.prop.productsHome);
   });
 }
 

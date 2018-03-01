@@ -43,7 +43,7 @@
 		<div class="container-menu-header">
 			<div class="wrap_header">
 				<!-- Logo -->
-				<a href="index.html" class="logo">
+				<a href="home" class="logo">
 					<img src="<?php echo base_url(); ?>assets/images/icons/logo.png" alt="IMG-LOGO">
 				</a>
 
@@ -113,20 +113,20 @@
 										</a>
 
 										<span class="header-cart-item-info">
-											1 x ${{ product.precio }}
+											{{ product.cantidadCarrito }} x ${{ product.precio }}
 										</span>
 									</div>
 								</li>
 							</ul>
 
 							<div class="header-cart-total">
-								Total: ${{ cart.prop.subtotal }}
+								Total: ${{ cart.prop.subtotalDiscount }}
 							</div>
 
 							<div class="header-cart-buttons">
 								<div class="header-cart-wrapbtn" style="margin: auto">
 									<!-- Button -->
-									<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									<a href="cart" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 									  Ver carrito
 									</a>
 								</div>
