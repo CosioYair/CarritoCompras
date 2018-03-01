@@ -84,6 +84,7 @@ var products = __webpack_require__(5);
 var app = new Vue({
   el: '#app',
   created: function created() {
+    this.login.method.getUser();
     this.products.method.getProducts();
     this.cart.method.getProductsSession();
   },
@@ -125,11 +126,13 @@ var login = {
     showErrorMessage: false,
     errorMessage: "Usuario o contrasena invalida",
     email: '',
-    password: ''
+    password: '',
+    user: {}
   },
   method: {
     loginUser: loginUser,
-    logout: logout
+    logout: logout,
+    getUser: getUser
   }
 };
 
@@ -148,6 +151,12 @@ function loginUser() {
 function logout() {
   $.get("middleware/deleteSessionVariables");
   window.location.reload();
+}
+
+function getUser() {
+  $.get("login/getUser", function (result) {
+    login.prop.user = result;
+  });
 }
 
 module.exports = login;
@@ -175,7 +184,8 @@ var cart = {
     plusOne: plusOne,
     subtractOne: subtractOne,
     updateCart: updateCart,
-    applyDiscount: applyDiscount
+    applyDiscount: applyDiscount,
+    saveDiscount: saveDiscount
   }
 };
 
@@ -239,6 +249,12 @@ function applyDiscount() {
   cart.prop.subtotalDiscount = cart.prop.subtotal * (100 - cart.prop.discount) / 100;
 }
 
+function saveDiscount() {
+  $.post("cart/saveDiscount", {
+    discount: cart.prop.discount
+  }, function (result) {});
+}
+
 module.exports = cart;
 
 /***/ }),
@@ -260,7 +276,6 @@ var products = {
 function getProducts() {
   $.get("cart/getProductos", function (result) {
     products.prop.productsHome = result.response;
-    console.log(products.prop.productsHome);
   });
 }
 
