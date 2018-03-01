@@ -141,6 +141,8 @@ class Vinos_model extends CI_Model  {
 	function insertPedido(){
 		$usuario = $this->session->userdata('user');
 		$descuento = $this->session->userdata('descuento');
+		$descripcion = $this->session->userdata('descripcion');
+		$fecha_entrega = $this->session->userdata('fecha_entrega');
 		if ($usuario->empleado == 0) {
 		$pedido = array(
 			'id_sucursal' => 0000,
