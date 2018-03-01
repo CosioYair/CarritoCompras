@@ -53,6 +53,7 @@ $route['default_controller'] = 'login';
 $route['middleware'] = 'middleware';
 $route['home'] = 'cart/home_view';
 $route['cart'] = 'cart/cart_view';
+$route['checkout'] = 'cart/checkout_view';
 $route['test'] = 'Cart_admin/test';
 $route['dashboard'] = 'Cart_admin/index';
 $route['categorias'] = 'Cart_admin/catCategorias';
