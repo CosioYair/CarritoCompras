@@ -42,7 +42,7 @@
 					    <?php }?>
 					    </select>
 					</div>
-				  <button type="button" id="subm" class="btn btn-default">Submit</button>
+				  <button type="button" id="subm" class="btn btn-default">Modificar</button>
 				</form>
 			</div>
 		</div>
