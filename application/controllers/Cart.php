@@ -28,10 +28,14 @@ class Cart extends Middleware {
 	}
 
 	public function cart_view(){
+		if(!isset($_SESSION['productsCart']) || count($_SESSION['productsCart']) == 0)
+      redirect("/", "refresh");
     $this->output('cart',false);
 	}
 
 	public function checkout_view(){
+		if(!isset($_SESSION['productsCart']) || count($_SESSION['productsCart']) == 0)
+      redirect("/", "refresh");
     $this->output('checkout',false);
 	}
 
