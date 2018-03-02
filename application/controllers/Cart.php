@@ -27,6 +27,10 @@ class Cart extends Middleware {
     $this->output('home',false);
 	}
 
+	public function categories_view(){
+    $this->output('categories',false);
+	}
+
 	public function cart_view(){
 		if(!isset($_SESSION['productsCart']) || count($_SESSION['productsCart']) == 0)
       redirect("/", "refresh");

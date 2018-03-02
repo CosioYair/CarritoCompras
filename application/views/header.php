@@ -55,13 +55,13 @@
 								<a>Todas las categorias</a>
 								<ul class="sub_menu">
 							    <li v-for="category in products.prop.mainCategories">
-							    	<a href="s">{{ category.nombre }}</a>
+							    	<a :href="'categories?id=' + category.id_categoria">{{ category.nombre }}</a>
 							    </li>
 								</ul>
 							</li>
 
 							<li v-for="category in products.prop.categories">
-								<a :href="category.id_categoria">{{ category.nombre }}</a>
+								<a :href="'categories?id=' + category.id_categoria">{{ category.nombre }}</a>
 							</li>
 						</ul>
 					</nav>
