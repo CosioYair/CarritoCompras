@@ -27,6 +27,14 @@ class Cart extends Middleware {
     $this->output('home',false);
 	}
 
+	public function categories_view(){
+		$id = $this->input->get('id');
+		$title = json_encode($this->Vinos_model->getTitleCategory($id));
+    $this->session->set_userdata('category', $id);
+    $this->session->set_userdata('titleCategory', $title);
+    $this->output('categories',false);
+	}
+
 	public function cart_view(){
 		if(!isset($_SESSION['productsCart']) || count($_SESSION['productsCart']) == 0)
       redirect("/", "refresh");
@@ -98,25 +106,36 @@ class Cart extends Middleware {
 	    $this->session->set_userdata('descripcion', $description);
 	    $this->session->set_userdata('fecha_entrega', $date);
 	}
-	public function getCategorias(){
+
+	public function getCategories(){
 		$data = $this->Vinos_model->getCategorias();
 		if(!$data) {
 			$resp =  array("code"=>404,"message"=>"Ocurrio un error durante la busqueda de categorias","response"=>false);
 		}else{
 			$resp =  array("code"=>200,"message"=>"Categorias encontradas con exito","response"=>$data);
 		}
-    	header('Content-Type: application/json');
-		echo json_encode($resp);
+    header('Content-Type: application/json');
+    echo json_encode($resp);
 	}
-	public function getProdsByCategorie(){
-		$id = $this->input->get('id');
+
+	public function setProdsByCategory($id){
 		$data = $this->Vinos_model->getProductos($id);
-		if(!$data) {
-			$resp =  array("code"=>404,"message"=>"No se encontraron productos","response"=>false);
-		}else{
-			$resp =  array("code"=>200,"message"=>"Productos encontrados con exito","response"=>$data);
-		}
-    	header('Content-Type: application/json');
-		echo json_encode($resp);
+    return $data;
+	}
+
+	public function getProductsByCategory(){
+    header('Content-Type: application/json');
+    if(isset($_SESSION['category']))
+      echo json_encode($this->setProdsByCategory($_SESSION['category']));
+    else
+      echo array();
+	}
+
+	public function getTitleCategory(){
+    header('Content-Type: application/json');
+    if(isset($_SESSION['titleCategory']))
+      echo $_SESSION['titleCategory'];
+    else
+      echo "";
 	}
 }

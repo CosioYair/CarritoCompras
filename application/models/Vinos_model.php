@@ -52,7 +52,7 @@ class Vinos_model extends CI_Model  {
 	function getProductos($id_categoria=""){
 		$user = $this->session->userdata('user');
 		if ($user->id_nivel == 1) {
-		$this->db->select('productos.*,sucursal.nombre as sucursal, categoria.nombre as categoria,productos.precio1 as precio');	
+		$this->db->select('productos.*,sucursal.nombre as sucursal, categoria.nombre as categoria,productos.precio1 as precio');
 		}elseif ($user->id_nivel == 2) {
 			$this->db->select('productos.*,sucursal.nombre as sucursal, categoria.nombre as categoria,productos.precio2 as precio');
 		}elseif ($user->id_nivel == 3) {
@@ -68,51 +68,51 @@ class Vinos_model extends CI_Model  {
 			$this->db->where('productos.id_sucursal', $user->id_sucursal);
 		}
 		if (!empty($id)) {
-			$this->db->where('productos.id_categoria', $id_categoria);	
+			$this->db->where('productos.id_categoria', $id_categoria);
 		}
 		$this->db->distinct('productos.codigo');
 		$query = $this->db->get();
 		return $query->result_array();
 	}
 	function getSucursales(){
-		$this->db->select('*');	
+		$this->db->select('*');
 		$this->db->from('sucursal');
 		$query = $this->db->get();
 		return $query->result_array();
 	}
 
 	function updateProductosSucursal($update){
-		$this->db->select('*');	
+		$this->db->select('*');
 		$this->db->from('productos');
 		$this->db->where('nombre', $update['productos']);
 		$this->db->where('id_sucursal', $update['suc_env']);
 		$query2 = $this->db->get();
 		$query2 = $query2->row();
 
-		$this->db->select('cantidad,nombre');	
+		$this->db->select('cantidad,nombre');
 		$this->db->from('productos');
 		$this->db->where('nombre', $update['productos']);
 		$this->db->where('id_sucursal', $update['suc_rec']);
 		$query3 = $this->db->get();
 		$query3 = $query3->row();
-		if ($query2->cantidad >= $update['cantidad']) {			
+		if ($query2->cantidad >= $update['cantidad']) {
 			if ($query3 != NULL) {
-				$cantidad = $query2->cantidad - $update['cantidad'];	
-				$cantidad2 = $query3->cantidad + $update['cantidad'];	
+				$cantidad = $query2->cantidad - $update['cantidad'];
+				$cantidad2 = $query3->cantidad + $update['cantidad'];
 				$data = array(
 		    	   'cantidad' => $cantidad
 		    	);
 				$this->db->where('nombre', $update['productos']);
 				$this->db->where('id_sucursal', $update['suc_env']);
-				$this->db->update('productos', $data); 
+				$this->db->update('productos', $data);
 				$data2 = array(
 		    	   'cantidad' => $cantidad2
 		    	);
 				$this->db->where('nombre', $update['productos']);
 				$this->db->where('id_sucursal', $update['suc_rec']);
-				$this->db->update('productos', $data2); 
+				$this->db->update('productos', $data2);
 				return true;
-			}else{ 
+			}else{
 				$prod = array(
    					'nombre' => $query2->nombre,
 					'descripcion' => $query2->descripcion,
@@ -127,7 +127,7 @@ class Vinos_model extends CI_Model  {
 					'id_provedor' => $query2->id_provedor,
 					'imagen_producto' => $query2->imagen_producto
 				);
-				$this->db->insert('productos', $prod); 
+				$this->db->insert('productos', $prod);
 				$cantidad = $query2->cantidad - $update['cantidad'];
 				$data = array(
 		    	   'cantidad' => $cantidad
@@ -155,7 +155,7 @@ class Vinos_model extends CI_Model  {
 			'estatus' => "En proceso de creacion",
 			'descripcion' => $descripcion,
 			'fecha_entrega' =>$fecha_entrega,
-			'tipo_venta'=>'Pedido realizado por un clientre atraves de la plataforma web' 
+			'tipo_venta'=>'Pedido realizado por un clientre atraves de la plataforma web'
 		);
 		}else{
 		$pedido = array(
@@ -172,7 +172,7 @@ class Vinos_model extends CI_Model  {
 		$this->db->insert('pedido', $pedido);
 		$insert_id = $this->db->insert_id();
 
-		$this->regPedido($insert_id,$descuento); 
+		$this->regPedido($insert_id,$descuento);
 		return true;
 	}
 
@@ -190,13 +190,22 @@ class Vinos_model extends CI_Model  {
 		}
 		return true;
 	}
-	
+
 	function getCategorias(){
-		$this->db->select('*');	
+		$this->db->select('*');
 		$this->db->from('categoria');
 		$query3 = $this->db->get();
 		$query3 = $query3->result_array();
 		return $query3;
 	}
-	
+
+	function getTitleCategory($id){
+		$this->db->select('nombre');
+		$this->db->from('categoria');
+    $this->db->where('id_categoria', $id);
+		$query3 = $this->db->get();
+		$query3 = $query3->result_array();
+		return $query3;
+	}
+
 }
