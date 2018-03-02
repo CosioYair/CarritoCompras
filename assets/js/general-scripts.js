@@ -10,6 +10,7 @@ var app = new Vue({
     this.login.method.getUser();
     this.products.method.getProducts();
     this.cart.method.getProductsSession();
+    this.products.method.getProductsByCategory();
   },
   data: {
     login:    login,

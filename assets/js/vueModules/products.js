@@ -3,10 +3,12 @@ var products = {
     productsHome: [],
     categoires: [],
     mainCategoires: [],
+    productsCategory: [],
   },
   method: {
     getProducts: getProducts,
-    getCategories:getCategories,
+    getCategories: getCategories,
+    getProductsByCategory: getProductsByCategory,
   }
 }
 
@@ -20,7 +22,12 @@ function getCategories(){
   $.get("cart/getCategories", result => {
     products.prop.categories = result.response;
     products.prop.mainCategories = result.response.slice(0,4);
-    console.log(products.prop.categories)
+  });
+}
+
+function getProductsByCategory(){
+  $.get("cart/getProductsByCategory", result => {
+    products.prop.productsCategory = result;
   });
 }
 

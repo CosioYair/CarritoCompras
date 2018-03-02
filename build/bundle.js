@@ -89,6 +89,7 @@ var app = new Vue({
     this.login.method.getUser();
     this.products.method.getProducts();
     this.cart.method.getProductsSession();
+    this.products.method.getProductsByCategory();
   },
 
   data: {
@@ -301,11 +302,13 @@ var products = {
   prop: {
     productsHome: [],
     categoires: [],
-    mainCategoires: []
+    mainCategoires: [],
+    productsCategory: []
   },
   method: {
     getProducts: getProducts,
-    getCategories: getCategories
+    getCategories: getCategories,
+    getProductsByCategory: getProductsByCategory
   }
 };
 
@@ -319,7 +322,12 @@ function getCategories() {
   $.get("cart/getCategories", function (result) {
     products.prop.categories = result.response;
     products.prop.mainCategories = result.response.slice(0, 4);
-    console.log(products.prop.categories);
+  });
+}
+
+function getProductsByCategory() {
+  $.get("cart/getProductsByCategory", function (result) {
+    products.prop.productsCategory = result;
   });
 }
 

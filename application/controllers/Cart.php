@@ -28,6 +28,8 @@ class Cart extends Middleware {
 	}
 
 	public function categories_view(){
+		$id = $this->input->get('id');
+    $this->setProdsByCategory($id);
     $this->output('categories',false);
 	}
 
@@ -114,15 +116,16 @@ class Cart extends Middleware {
     echo json_encode($resp);
 	}
 
-	public function getProdsByCategory(){
-		$id = $this->input->get('id');
+	public function setProdsByCategory($id){
 		$data = $this->Vinos_model->getProductos($id);
-		if(!$data) {
-			$resp =  array("code"=>404,"message"=>"No se encontraron productos","response"=>false);
-		}else{
-			$resp =  array("code"=>200,"message"=>"Productos encontrados con exito","response"=>$data);
-		}
+    $this->session->set_userdata('productsCategory', $data);
+	}
+
+	public function getProductsByCategory(){
     header('Content-Type: application/json');
-		echo json_encode($resp);
+    if(isset($_SESSION['productsCategory']))
+      echo json_encode($_SESSION["productsCategory"]);
+    else
+      echo array();
 	}
 }
