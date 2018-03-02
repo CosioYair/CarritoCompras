@@ -3,7 +3,9 @@ var cart = {
     productsCart: [],
     subtotal: 0,
     subtotalDiscount: 0,
-    discount: 0
+    discount: 0,
+    descriptionOrder: "",
+    dateOrder: ""
   },
   method: {
     addToCart: addToCart,
@@ -17,6 +19,8 @@ var cart = {
     applyDiscount: applyDiscount,
     saveDiscount: saveDiscount,
     getDiscount: getDiscount,
+    registerOrder: registerOrder,
+    saveDetails: saveDetails,
   }
 }
 
@@ -81,7 +85,6 @@ function applyDiscount(){
 }
 
 function saveDiscount(){
-  console.log(cart.prop.discount)
   $.post("cart/saveDiscount", {
     discount: cart.prop.discount
   }, result => {
@@ -92,6 +95,21 @@ function saveDiscount(){
 function getDiscount(){
   $.get("cart/getDiscount", result => {
     cart.prop.discount = result;
+  });
+}
+
+function registerOrder(){
+  $.get("cart/registerOrder", result => {
+    console.log(result);
+  });
+}
+
+function saveDetails(){
+  $.post("cart/saveDetails", {
+    description: cart.prop.descriptionOrder,
+    date: cart.prop.dateOrder
+  }, result => {
+    cart.method.registerOrder();
   });
 }
 
