@@ -73,7 +73,7 @@ class Cart extends Middleware {
     echo json_encode($_SESSION["productsCart"]);
 	}
 
-	public function regPedido(){
+	public function registerOrder(){
 		$data = $this->Vinos_model->insertPedido();
 		if(!$data) {
 			$resp =  array("code"=>404,"message"=>"Ocurrio un error durante el registro del pedido","response"=>false);
@@ -86,5 +86,12 @@ class Cart extends Middleware {
 	public function test(){
 		$u = $this->session->userdata('productsCart');
 		die(var_dump($u));
+	}
+
+	public function saveDetails(){
+    $description = $this->input->post('description');
+    $date = $this->input->post('date');
+    $this->session->set_userdata('descripcion', $description);
+    $this->session->set_userdata('fecha_entrega', $date);
 	}
 }

@@ -174,7 +174,9 @@ var cart = {
     productsCart: [],
     subtotal: 0,
     subtotalDiscount: 0,
-    discount: 0
+    discount: 0,
+    descriptionOrder: "",
+    dateOrder: ""
   },
   method: {
     addToCart: addToCart,
@@ -187,7 +189,9 @@ var cart = {
     updateCart: updateCart,
     applyDiscount: applyDiscount,
     saveDiscount: saveDiscount,
-    getDiscount: getDiscount
+    getDiscount: getDiscount,
+    registerOrder: registerOrder,
+    saveDetails: saveDetails
   }
 };
 
@@ -252,7 +256,6 @@ function applyDiscount() {
 }
 
 function saveDiscount() {
-  console.log(cart.prop.discount);
   $.post("cart/saveDiscount", {
     discount: cart.prop.discount
   }, function (result) {});
@@ -261,6 +264,21 @@ function saveDiscount() {
 function getDiscount() {
   $.get("cart/getDiscount", function (result) {
     cart.prop.discount = result;
+  });
+}
+
+function registerOrder() {
+  $.get("cart/registerOrder", function (result) {
+    console.log(result);
+  });
+}
+
+function saveDetails() {
+  $.post("cart/saveDetails", {
+    description: cart.prop.descriptionOrder,
+    date: cart.prop.dateOrder
+  }, function (result) {
+    cart.method.registerOrder();
   });
 }
 
