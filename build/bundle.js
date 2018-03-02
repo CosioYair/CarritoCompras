@@ -84,6 +84,7 @@ var products = __webpack_require__(5);
 var app = new Vue({
   el: '#app',
   created: function created() {
+    this.products.method.getCategories();
     this.cart.method.getDiscount();
     this.login.method.getUser();
     this.products.method.getProducts();
@@ -298,16 +299,27 @@ module.exports = cart;
 
 var products = {
   prop: {
-    productsHome: []
+    productsHome: [],
+    categoires: [],
+    mainCategoires: []
   },
   method: {
-    getProducts: getProducts
+    getProducts: getProducts,
+    getCategories: getCategories
   }
 };
 
 function getProducts() {
   $.get("cart/getProductos", function (result) {
     products.prop.productsHome = result.response;
+  });
+}
+
+function getCategories() {
+  $.get("cart/getCategories", function (result) {
+    products.prop.categories = result.response;
+    products.prop.mainCategories = result.response.slice(0, 4);
+    console.log(products.prop.categories);
   });
 }
 
