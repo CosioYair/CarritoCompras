@@ -269,17 +269,22 @@ function getDiscount() {
 
 function registerOrder() {
   $.get("cart/registerOrder", function (result) {
-    console.log(result);
+    if (result.code == 200) {
+      var message = alert(result.message);
+      window.location.replace('home');
+    } else alert(result.message);
   });
 }
 
 function saveDetails() {
-  $.post("cart/saveDetails", {
-    description: cart.prop.descriptionOrder,
-    date: cart.prop.dateOrder
-  }, function (result) {
-    cart.method.registerOrder();
-  });
+  if (cart.prop.dateOrder != "") {
+    $.post("cart/saveDetails", {
+      description: cart.prop.descriptionOrder,
+      date: cart.prop.dateOrder
+    }, function (result) {
+      cart.method.registerOrder();
+    });
+  } else alert("Es necesario indicar una fecha de entrega");
 }
 
 module.exports = cart;

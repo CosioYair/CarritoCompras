@@ -78,14 +78,18 @@ class Cart extends Middleware {
 	}
 
 	public function registerOrder(){
-		$data = $this->Vinos_model->insertPedido();
-		if(!$data) {
-			$resp =  array("code"=>404,"message"=>"Ocurrio un error durante el registro del pedido","response"=>false);
-		}else{
-			$resp =  array("code"=>200,"message"=>"Pedido registrado con exito","response"=>$data);
-		}
-    	header('Content-Type: application/json');
-		echo json_encode($resp);
+    $data = $this->Vinos_model->insertPedido();
+    if(!$data) {
+      $resp =  array("code"=>404,"message"=>"Ocurrio un error durante el registro del pedido","response"=>false);
+    }else{
+      $resp =  array("code"=>200,"message"=>"Pedido registrado con exito","response"=>$data);
+      $this->session->unset_userdata('productsCart');
+      $this->session->unset_userdata('discount');
+      $this->session->unset_userdata('descripcion');
+      $this->session->unset_userdata('fecha_entrega');
+    }
+    header('Content-Type: application/json');
+    echo json_encode($resp);
 	}
 
 	public function saveDetails(){
