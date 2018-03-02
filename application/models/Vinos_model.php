@@ -71,7 +71,7 @@ class Vinos_model extends CI_Model  {
 		if (!empty($id_categoria)) {
 			$this->db->where('productos.id_categoria', $id_categoria);
 		}
-		$this->db->distinct('productos.codigo');
+		$this->db->group_by('productos.codigo');
 		$query = $this->db->get();
 		return $query->result_array();
 	}
