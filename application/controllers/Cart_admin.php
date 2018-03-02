@@ -112,6 +112,7 @@ class Cart_admin extends Middleware {
 	}
 	public function getPedido(){
 		$data['pedidos'] = $this->Vinos_model->getPedidos();
+		die(var_dump(json_encode($data)));
 		$this->outputDashboard('pedidos',$data);
 	}
 	public function outputDashboard($view, $data = false) {
