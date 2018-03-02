@@ -77,10 +77,10 @@ span.psw {
 
   <div class="container">
     <label for="uname"><b>Correo</b></label>
-    <input v-model="login.prop.email" type="text" placeholder="Ingresa correo" name="email" required>
+    <input @keyup.enter.prevent="login.method.loginUser" v-model="login.prop.email" type="text" placeholder="Ingresa correo" name="email" required>
 
     <label for="psw"><b>Password</b></label>
-    <input v-model="login.prop.password" type="password" placeholder="Ingresa contrasena" name="psw" required>
+    <input @keyup.enter.prevent="login.method.loginUser" v-model="login.prop.password" type="password" placeholder="Ingresa contrasena" name="psw" required>
 
     <label v-if="login.prop.showErrorMessage" for="psw"><b>{{ login.prop.errorMessage }}</b></label>
     <button @click="login.method.loginUser" type="button">Login</button>
