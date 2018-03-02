@@ -303,12 +303,14 @@ var products = {
     productsHome: [],
     categoires: [],
     mainCategoires: [],
-    productsCategory: []
+    productsCategory: [],
+    titleCategory: ""
   },
   method: {
     getProducts: getProducts,
     getCategories: getCategories,
-    getProductsByCategory: getProductsByCategory
+    getProductsByCategory: getProductsByCategory,
+    getTitleCategory: getTitleCategory
   }
 };
 
@@ -328,6 +330,14 @@ function getCategories() {
 function getProductsByCategory() {
   $.get("cart/getProductsByCategory", function (result) {
     products.prop.productsCategory = result;
+    products.method.getTitleCategory();
+  });
+}
+
+function getTitleCategory() {
+  $.get("cart/getTitleCategory", function (result) {
+    products.prop.titleCategory = result[0].nombre;
+    console.log(result);
   });
 }
 

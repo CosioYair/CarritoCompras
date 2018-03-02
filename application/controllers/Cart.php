@@ -29,7 +29,9 @@ class Cart extends Middleware {
 
 	public function categories_view(){
 		$id = $this->input->get('id');
-    $this->setProdsByCategory($id);
+		$title = json_encode($this->Vinos_model->getTitleCategory($id));
+    $this->session->set_userdata('category', $id);
+    $this->session->set_userdata('titleCategory', $title);
     $this->output('categories',false);
 	}
 
@@ -118,14 +120,22 @@ class Cart extends Middleware {
 
 	public function setProdsByCategory($id){
 		$data = $this->Vinos_model->getProductos($id);
-    $this->session->set_userdata('productsCategory', $data);
+    return $data;
 	}
 
 	public function getProductsByCategory(){
     header('Content-Type: application/json');
-    if(isset($_SESSION['productsCategory']))
-      echo json_encode($_SESSION["productsCategory"]);
+    if(isset($_SESSION['category']))
+      echo json_encode($this->setProdsByCategory($_SESSION['category']));
     else
       echo array();
+	}
+
+	public function getTitleCategory(){
+    header('Content-Type: application/json');
+    if(isset($_SESSION['titleCategory']))
+      echo $_SESSION['titleCategory'];
+    else
+      echo "";
 	}
 }

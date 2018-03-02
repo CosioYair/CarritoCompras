@@ -3,7 +3,7 @@
 		<div class="container">
 			<div class="sec-title p-b-52">
 				<h3 class="m-text5 t-center">
-				  Productos
+				  {{ products.prop.titleCategory }}
 				</h3>
 			</div>
 			<div class="row">
