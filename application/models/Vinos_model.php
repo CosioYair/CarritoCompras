@@ -143,7 +143,7 @@ class Vinos_model extends CI_Model  {
 		$descuento = $this->session->userdata('descuento');
 		$descripcion = $this->session->userdata('descripcion');
 		$fecha_entrega = $this->session->userdata('fecha_entrega');
-		if ($usuario->empleado == 0) {
+		if ($usuario->empleado == 1) {
 		$pedido = array(
 			'id_sucursal' => 1,
 			'id_usuario_compra' => $usuario->id_usuario,
