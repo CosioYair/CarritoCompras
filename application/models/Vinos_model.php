@@ -49,7 +49,7 @@ class Vinos_model extends CI_Model  {
     $row   = $query->row();
     return $row;
   }
-	function getProductos(){
+	function getProductos($id_categoria=""){
 		$user = $this->session->userdata('user');
 		if ($user->id_nivel == 1) {
 		$this->db->select('productos.*,sucursal.nombre as sucursal, categoria.nombre as categoria,productos.precio1 as precio');	
@@ -66,6 +66,9 @@ class Vinos_model extends CI_Model  {
 		$this->db->join('provedores','provedores.id_provedor = productos.id_provedor');
 		if ($user->empleado == 1) {
 			$this->db->where('productos.id_sucursal', $user->id_sucursal);
+		}
+		if (!empty($id)) {
+			$this->db->where('productos.id_categoria', $id_categoria);	
 		}
 		$this->db->distinct('productos.codigo');
 		$query = $this->db->get();
