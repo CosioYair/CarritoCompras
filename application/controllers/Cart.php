@@ -89,9 +89,19 @@ class Cart extends Middleware {
 	}
 
 	public function saveDetails(){
-    $description = $this->input->post('description');
-    $date = $this->input->post('date');
-    $this->session->set_userdata('descripcion', $description);
-    $this->session->set_userdata('fecha_entrega', $date);
+	    $description = $this->input->post('description');
+	    $date = $this->input->post('date');
+	    $this->session->set_userdata('descripcion', $description);
+	    $this->session->set_userdata('fecha_entrega', $date);
+	}
+	public function getCategorias(){
+		$data = $this->Vinos_model->getCategorias();
+		if(!$data) {
+			$resp =  array("code"=>404,"message"=>"Ocurrio un error durante la busqueda de categorias","response"=>false);
+		}else{
+			$resp =  array("code"=>200,"message"=>"Categorias encontradas con exito","response"=>$data);
+		}
+    	header('Content-Type: application/json');
+		echo json_encode($resp);
 	}
 }

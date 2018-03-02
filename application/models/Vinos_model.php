@@ -143,7 +143,7 @@ class Vinos_model extends CI_Model  {
 		$descuento = $this->session->userdata('descuento');
 		$descripcion = $this->session->userdata('descripcion');
 		$fecha_entrega = $this->session->userdata('fecha_entrega');
-		if ($usuario->empleado == 0) {
+		if ($usuario->empleado == 1) {
 		$pedido = array(
 			'id_sucursal' => 1,
 			'id_usuario_compra' => $usuario->id_usuario,
@@ -186,6 +186,14 @@ class Vinos_model extends CI_Model  {
 			$this->db->insert('pedido2cliente', $pedido);
 		}
 		return true;
+	}
+	
+	function getCategorias(){
+		$this->db->select('*');	
+		$this->db->from('categoria');
+		$query3 = $this->db->get();
+		$query3 = $query3->result_array();
+		return $query3;
 	}
 	
 }

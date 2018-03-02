@@ -76,7 +76,7 @@
           <img src="<?php echo base_url(); ?>assets/admin/dist/img/avatar-ninja.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p><?php echo 'nombre';?></p>
+          <p><?php echo $this->session->userdata('user')->nombre_completo;?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>

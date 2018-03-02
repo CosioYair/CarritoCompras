@@ -12,7 +12,7 @@
             <!-- Example Tables Card -->
             <div class="card mb-3">
                 <div class="">
-                    <center><h1>Bienvenido: NOMBRE</h1></center>
+                    <center><h1>Bienvenido: <?php echo $this->session->userdata('user')->nombre_completo; ?></h1></center>
                 </div>                    
             </div>
 

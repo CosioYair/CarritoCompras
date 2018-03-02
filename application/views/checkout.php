@@ -2,7 +2,7 @@
 	<section class="cart bgwhite p-t-70 p-b-100">
 		<div class="container">
 			<!-- Cart item -->
-			<div class="container-table-cart pos-relative">
+			<div id="id" class="container-table-cart pos-relative">
 				<div class="wrap-table-shopping-cart bgwhite">
 					<table class="table-shopping-cart">
 						<tr class="table-head">
@@ -36,15 +36,23 @@
           <textarea v-model="cart.prop.descriptionOrder" class="form-control" rows="10"></textarea>
         </div>
         <div class="col-md-4">
-          <label for="pwd">Fecha de entrega:</label>
+          <label for="">Fecha de entrega:</label>
           <input v-model="cart.prop.dateOrder" type="date" class="datepicker">
         </div>
 			</div>
 
 		</div>
 				<div class="size10 trans-0-4 m-t-10 m-b-10 btn-confirm">
-					<button @click="cart.method.saveDetails" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+					<button @click="cart.method.saveDetails" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" onclick="myFunction()">
 					  <a class="linkCheckout">Confirmar pedido</a>
 					</button>
 				</div>
 	</section>
+
+<script>
+function myFunction() {
+	$("#id").width(600);
+	$("#id").css("margin-left", "1px");
+    window.print();
+}
+</script>
