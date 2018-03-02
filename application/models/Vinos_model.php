@@ -188,4 +188,12 @@ class Vinos_model extends CI_Model  {
 		return true;
 	}
 	
+	function getCategorias(){
+		$this->db->select('*');	
+		$this->db->from('categoria');
+		$query3 = $this->db->get();
+		$query3 = $query3->result_array();
+		return $query3;
+	}
+	
 }
