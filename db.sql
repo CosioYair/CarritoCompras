@@ -80,3 +80,4 @@ ALTER TABLE pedido ADD tipo_venta varchar(150);
 ALTER TABLE usuarios ADD id_sucursal int(11);
 ALTER TABLE pedido2cliente ADD precio_elegido_venta varchar(80) not null;
 ALTER TABLE pedido ADD descripcion text;
+ALTER TABLE pedido ADD tipo_venta varchar(100);

@@ -84,10 +84,12 @@ var products = __webpack_require__(5);
 var app = new Vue({
   el: '#app',
   created: function created() {
+    this.products.method.getCategories();
     this.cart.method.getDiscount();
     this.login.method.getUser();
     this.products.method.getProducts();
     this.cart.method.getProductsSession();
+    this.products.method.getProductsByCategory();
   },
 
   data: {
@@ -269,17 +271,22 @@ function getDiscount() {
 
 function registerOrder() {
   $.get("cart/registerOrder", function (result) {
-    console.log(result);
+    if (result.code == 200) {
+      var message = alert(result.message);
+      window.location.replace('home');
+    } else alert(result.message);
   });
 }
 
 function saveDetails() {
-  $.post("cart/saveDetails", {
-    description: cart.prop.descriptionOrder,
-    date: cart.prop.dateOrder
-  }, function (result) {
-    cart.method.registerOrder();
-  });
+  if (cart.prop.dateOrder != "") {
+    $.post("cart/saveDetails", {
+      description: cart.prop.descriptionOrder,
+      date: cart.prop.dateOrder
+    }, function (result) {
+      cart.method.registerOrder();
+    });
+  } else alert("Es necesario indicar una fecha de entrega");
 }
 
 module.exports = cart;
@@ -293,16 +300,44 @@ module.exports = cart;
 
 var products = {
   prop: {
-    productsHome: []
+    productsHome: [],
+    categoires: [],
+    mainCategoires: [],
+    productsCategory: [],
+    titleCategory: ""
   },
   method: {
-    getProducts: getProducts
+    getProducts: getProducts,
+    getCategories: getCategories,
+    getProductsByCategory: getProductsByCategory,
+    getTitleCategory: getTitleCategory
   }
 };
 
 function getProducts() {
   $.get("cart/getProductos", function (result) {
     products.prop.productsHome = result.response;
+  });
+}
+
+function getCategories() {
+  $.get("cart/getCategories", function (result) {
+    products.prop.categories = result.response;
+    products.prop.mainCategories = result.response.slice(0, 4);
+  });
+}
+
+function getProductsByCategory() {
+  $.get("cart/getProductsByCategory", function (result) {
+    products.prop.productsCategory = result;
+    products.method.getTitleCategory();
+  });
+}
+
+function getTitleCategory() {
+  $.get("cart/getTitleCategory", function (result) {
+    products.prop.titleCategory = result[0].nombre;
+    console.log(result);
   });
 }
 
