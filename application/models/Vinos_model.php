@@ -50,7 +50,7 @@ class Vinos_model extends CI_Model  {
     return $row;
   }
 	function getProductos(){
-			$user = $this->session->userdata('user');
+		$user = $this->session->userdata('user');
 		if ($user->id_nivel == 1) {
 		$this->db->select('productos.*,sucursal.nombre as sucursal, categoria.nombre as categoria,productos.precio1 as precio');	
 		}elseif ($user->id_nivel == 2) {
@@ -64,7 +64,7 @@ class Vinos_model extends CI_Model  {
 		$this->db->join('sucursal','sucursal.id_sucursal = productos.id_sucursal');
 		$this->db->join('categoria','categoria.id_categoria = productos.id_categoria');
 		$this->db->join('provedores','provedores.id_provedor = productos.id_provedor');
-		if ($user->empleado == 0) {
+		if ($user->empleado == 1) {
 			$this->db->where('productos.id_sucursal', $user->id_sucursal);
 		}
 		$this->db->distinct('productos.codigo');
@@ -145,27 +145,30 @@ class Vinos_model extends CI_Model  {
 		$fecha_entrega = $this->session->userdata('fecha_entrega');
 		if ($usuario->empleado == 0) {
 		$pedido = array(
-			'id_sucursal' => 0000,
+			'id_sucursal' => 1,
 			'id_usuario_compra' => $usuario->id_usuario,
-			'id_usuario_venta' => 0000,
+			'id_usuario_venta' => 1,
 			'descuento' => 0,
 			'estatus' => "En proceso de creacion",
 			'descripcion' => $descripcion,
-			'fecha_entrega' =>$fecha_entrega 
+			'fecha_entrega' =>$fecha_entrega,
+			'tipo_venta'=>'Pedido realizado por un clientre atraves de la plataforma web' 
 		);
 		}else{
 		$pedido = array(
-			'id_sucursal' => 0000,
-			'id_usuario_compra' => 0000,
+			'id_sucursal' => 1,
+			'id_usuario_compra' => 1,
 			'id_usuario_venta' => $usuario->id_usuario,
 			'descuento' => $descuento,
 			'estatus' => "En proceso de creacion",
 			'descripcion' => $descripcion,
-			'fecha_entrega' => $fecha_entrega
+			'fecha_entrega' => $fecha_entrega,
+			'tipo_venta'=>'Pedido realizado por un empleado atraves de la plataforma web sin usuario registrado'
 		);
 		}
 		$this->db->insert('pedido', $pedido);
 		$insert_id = $this->db->insert_id();
+
 		$this->regPedido($insert_id,$descuento); 
 		return true;
 	}
