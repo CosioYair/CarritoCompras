@@ -87,10 +87,6 @@ class Cart extends Middleware {
     	header('Content-Type: application/json');
 		echo json_encode($resp);
 	}
-	public function test(){
-		$u = $this->session->userdata('productsCart');
-		die(var_dump($u));
-	}
 
 	public function saveDetails(){
     $description = $this->input->post('description');
