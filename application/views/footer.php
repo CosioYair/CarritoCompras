@@ -207,6 +207,7 @@
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/sweetalert/sweetalert.min.js"></script>
 <!--===============================================================================================-->
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/vue.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!--===============================================================================================-->
 	<script type="text/javascript" src="<?php echo base_url(); ?>build/bundle.js"></script>
 	<script type="text/javascript">
