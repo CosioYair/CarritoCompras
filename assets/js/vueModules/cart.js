@@ -121,5 +121,13 @@ function saveDetails(){
   else
     alert("Es necesario indicar una fecha de entrega")
 }
-
+function printElem(divId='id') {
+  if ($('.datepicker').val()){
+    var divToPrint = document.getElementById('id');
+        var popupWin = window.open('', '_blank', 'width=800,height=600,location=no,left=200px');
+        popupWin.document.open();
+        popupWin.document.write('<html><head><link href="http://127.0.0.1/c/assets/css/print.css" rel="stylesheet" type="text/css"></head><body onload="window.print()">' + divToPrint.innerHTML + '</body></html>');
+        popupWin.document.close();
+  }
+}
 module.exports = cart;
