@@ -201,10 +201,13 @@ function addToCart(product) {
   if (cart.prop.productsCart.findIndex(function (i) {
     return i.codigo === product.codigo;
   }) < 0) {
+    swal(product.nombre, "Producto agregado al carrito", "success");
     product.cantidadCarrito = 1;
     product.cantidadPrecioCarrito = parseInt(product.precio);
     cart.prop.productsCart.push(product);
     cart.method.updateCart();
+  } else {
+    swal(product.nombre, "El producto ya se encuentra dentro del carrito", "error");
   }
 }
 
