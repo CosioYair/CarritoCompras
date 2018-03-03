@@ -43,16 +43,8 @@
 
 		</div>
 				<div class="size10 trans-0-4 m-t-10 m-b-10 btn-confirm">
-					<button @click="cart.method.saveDetails" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" onclick="myFunction()">
+					<button @click="cart.method.saveDetails" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" onclick="printElem()">
 					  <a class="linkCheckout">Confirmar pedido</a>
 					</button>
 				</div>
 	</section>
-
-<script>
-function myFunction() {
-	$("#id").width(600);
-	$("#id").css("margin-left", "1px");
-    window.print();
-}
-</script>
