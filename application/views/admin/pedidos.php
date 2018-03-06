@@ -29,18 +29,18 @@
 				  <tbody>
 				  <?php
 				  if (!empty($pedidos)) {
-				  
+
 				  	$pedido = true;
-				  	$acciones = true; 
+				  	$acciones = true;
 				  	$temp=$pedidos[0]['id_pedido'];
-				  	foreach ($pedidos as $key => $value) { 
+				  	foreach ($pedidos as $key => $value) {
 				  		if ($temp == $value['id_pedido']) {
 				  			$pedido = true;
 				  		}else{
 				  			$pedido = false;
 				  			$acciones=true;
 				  			$temp=$value['id_pedido'];
-				  		}	
+				  		}
 				  	  	if ($pedido){
 				  ?>
 				  	<tr>
@@ -63,20 +63,20 @@
 				  		if ($acciones) {
 				 	  ?>
 				      <td>
-				      	<a href="#"><i class="fa fa-trash btn btn-default" aria-hidden="true"></i></a>
+				      	<a href="<?php echo 'deletePedido?id=' . $value['id_pedido'];?>"><i class="fa fa-trash btn btn-default" aria-hidden="true"></i></a>
 				      	<a href="#"><i class="fa fa-search btn btn-default" aria-hidden="true"></i></a>
 				      </td>
 				      <?php }else{echo "<td></td>"; } ?>
 				    </tr>
-				   <?php 
+				   <?php
 				   	$acciones=false;
-				   	} } 
+				   	} }
 				   ?>
 				  </tbody>
 				</table>
 			</div>
 		</div>
-	</section>  
+	</section>
 </div>
 <!-- /.content-wrapper -->
 
