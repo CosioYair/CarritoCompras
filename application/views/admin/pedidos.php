@@ -64,7 +64,6 @@
 				 	  ?>
 				      <td>
 				      	<a href="#"><i class="fa fa-trash btn btn-default" aria-hidden="true"></i></a>
-				      	<a href="#"><i class="fa fa-pencil btn btn-default" aria-hidden="true"></i></a>
 				      	<a href="#"><i class="fa fa-search btn btn-default" aria-hidden="true"></i></a>
 				      </td>
 				      <?php }else{echo "<td></td>"; } ?>
