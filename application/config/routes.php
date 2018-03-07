@@ -59,6 +59,7 @@ $route['test'] = 'Cart_admin/test';
 $route['dashboard'] = 'Cart_admin/index';
 $route['categorias'] = 'Cart_admin/catCategorias';
 $route['pedidos'] = 'Cart_admin/getPedido';
+$route['deletePedido'] = 'Cart_admin/deletePedido';
 $route['moverProductos'] = 'Cart_admin/moverProductos';
 $route['detallePedido'] = 'Cart_admin/detallePedido';
 $route['404_override'] = '';

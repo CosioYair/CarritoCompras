@@ -159,12 +159,18 @@ class Cart_admin extends Middleware {
 		$u = $this->session->userdata('user');
 		die(var_dump($u));
 	}
+
 	public function detallePedido(){
 		$id = $this->input->get('id');
 		$pedido['detallePedido'] = $this->Vinos_model->getPedidos($id);
 		$pedido['pedido'] = $this->Vinos_model->getPedido($id);
 		//die(var_dump($pedido['detallePedido']));
 		$this->outputDashboard('detallePedido',$pedido);
+	}
+	public function deletePedido(){
+		$id = $this->input->get('id');
+		$this->Vinos_model->deletePedido($id);
+    	redirect("/pedidos", "refresh");
 	}
 
 }

@@ -227,4 +227,8 @@ class Vinos_model extends CI_Model  {
 		return $query3;
 	}
 
+	function deletePedido($id){
+    $this->db->delete('pedido2cliente', array('id_pedido' => $id));
+    $this->db->delete('pedido', array('id_pedido' => $id));
+	}
 }
