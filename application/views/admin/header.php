@@ -130,12 +130,12 @@
             <i class="fa fa-list" aria-hidden="true"></i><span>Listado Pedidos</span>
           </a>
         </li>
-        <li <?php echo ($this->uri->segment(2) == "pedidos") ? 'class="active"' : ""; ?>>
+        <li <?php echo ($this->uri->segment(1) == "pedidos" or $this->uri->segment(1) == "detallePedido") ? 'class="active"' : ""; ?>>
           <a href="<?php echo base_url("pedidos"); ?>">
             <i class="fa fa-list" aria-hidden="true"></i><span>Pedidos</span>
           </a>
         </li>
-        <li <?php echo ($this->uri->segment(2) == "moverProductos") ? 'class="active"' : ""; ?>>
+        <li <?php echo ($this->uri->segment(1) == "moverProductos") ? 'class="active"' : ""; ?>>
           <a href="<?php echo base_url("moverProductos"); ?>">
             <i class="fa fa-list" aria-hidden="true"></i><span>Mover productos de sucursal</span>
           </a>
