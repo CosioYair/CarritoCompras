@@ -125,6 +125,11 @@
             <i class="fa fa-list" aria-hidden="true"></i><span>Productos</span>
           </a>
         </li>
+        <li <?php echo ($this->uri->segment(2) == "lstPedidos") ? 'class="active"' : ""; ?>>
+          <a href="<?php echo base_url("Cart_admin/lstPedidos"); ?>">
+            <i class="fa fa-list" aria-hidden="true"></i><span>Listado Pedidos</span>
+          </a>
+        </li>
         <li <?php echo ($this->uri->segment(2) == "pedidos") ? 'class="active"' : ""; ?>>
           <a href="<?php echo base_url("pedidos"); ?>">
             <i class="fa fa-list" aria-hidden="true"></i><span>Pedidos</span>

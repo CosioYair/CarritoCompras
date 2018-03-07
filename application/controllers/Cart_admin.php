@@ -86,6 +86,30 @@ class Cart_admin extends Middleware {
 			$output->titulo = "Home > Provedores";
 			$this->outputDashboard('content',$output);
 	}
+	public function lstPedidos(){
+			//$this->isUser();
+			$crud = new grocery_CRUD();
+			$crud->set_theme('flexigrid');
+			$crud->set_table("pedido");
+			$crud->set_subject('Listado de pedidos');
+			$crud->field_type('creacion','invisible');
+			$crud->set_primary_key('pedido','id_pedido');
+			$crud->columns('id_pedido','id_sucursal','id_usuario_compra','descuento','estatus','creacion');
+			$crud->set_relation('id_sucursal','sucursal','nombre');
+			$crud->unset_add();
+			$crud->unset_clone();
+			$crud->unset_delete();
+			
+			$crud->field_type('id_sucursal','invisible');
+			
+			$crud->field_type('id_usuario_compra','invisible');
+			$crud->field_type('id_usuario_venta','invisible');
+			$crud->field_type('descuento','invisible');
+			//$crud->set_relation('id_usuario_compra','usuarios','nombre');
+			$output = $crud->render();
+			$output->titulo = "Home > Pedido";
+			$this->outputDashboard('content',$output);
+	}
 	public function catUsuarios(){
 			//$this->isUser();
 			$crud = new grocery_CRUD();
@@ -97,6 +121,8 @@ class Cart_admin extends Middleware {
 			$crud->set_relation('id_nivel','nivel','tipo');
 			$crud->set_relation('id_sucursal','sucursal','nombre');
 			$crud->columns('nombre_completo','correo','id_nivel','empleado','creacion');
+			$crud->field_type('empleado','dropdown',
+			array('0' => 'Cliente', '1' => 'empleado','2' => 'admin'));
 			$crud->callback_before_insert(array($this,'md5_encrypt'));
 			$crud->callback_before_update(array($this,'md5_encrypt'));
 			$output = $crud->render();
@@ -132,6 +158,13 @@ class Cart_admin extends Middleware {
 	public function test(){
 		$u = $this->session->userdata('user');
 		die(var_dump($u));
+	}
+	public function detallePedido(){
+		$id = $this->input->get('id');
+		$pedido['detallePedido'] = $this->Vinos_model->getPedidos($id);
+		$pedido['pedido'] = $this->Vinos_model->getPedido($id);
+		//die(var_dump($pedido['detallePedido']));
+		$this->outputDashboard('detallePedido',$pedido);
 	}
 
 }

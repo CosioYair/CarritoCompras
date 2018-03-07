@@ -64,7 +64,7 @@
 				 	  ?>
 				      <td>
 				      	<a href="#"><i class="fa fa-trash btn btn-default" aria-hidden="true"></i></a>
-				      	<a href="#"><i class="fa fa-search btn btn-default" aria-hidden="true"></i></a>
+				      	<a href="<?php echo base_url('detallePedido') .'/?id='.$value['id_pedido']; ?>"><i class="fa fa-search btn btn-default" aria-hidden="true"></i></a>
 				      </td>
 				      <?php }else{echo "<td></td>"; } ?>
 				    </tr>

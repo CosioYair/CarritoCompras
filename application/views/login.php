@@ -43,7 +43,7 @@ button:hover {
 }
 
 img.avatar {
-    width: 40%;
+    width: 24%;
     border-radius: 50%;
 }
 
@@ -72,7 +72,7 @@ span.psw {
 
 <div id="app">
   <div class="imgcontainer">
-    <img src="http://bashooka.com/wp-content/uploads/2012/07/wine-logo-designs-2.png" alt="Avatar" class="avatar">
+    <img src="<?php echo base_url('assets/images/diamante.jpeg'); ?>" alt="Avatar" class="avatar">
   </div>
 
   <div class="container">

@@ -29,7 +29,7 @@ class Vinos_model extends CI_Model  {
 		}
 	}
 
-	function getPedidos(){
+	function getPedidos($id_pedido=""){
 		$this->db->select('pedido2cliente.*,pedido.*,productos.nombre,productos.codigo,productos.nombre,usuarios.nombre_completo, u.nombre_completo as empleado_vendio');
 		$this->db->from('pedido2cliente');
 		$this->db->join('pedido', 'pedido.id_pedido = pedido2cliente.id_pedido');
@@ -37,9 +37,27 @@ class Vinos_model extends CI_Model  {
 		$this->db->join('usuarios', 'usuarios.id_usuario = pedido.id_usuario_compra');
 		$this->db->join('usuarios as u', 'u.id_usuario = pedido.id_usuario_venta');
 		//$this->db->group_by("pedido2cliente.id_pedido");
+		if (!empty($id_pedido)) {
+			$this->db->where('pedido2cliente.id_pedido', $id_pedido);
+		}
 		$this->db->order_by('pedido2cliente.creacion', 'ASC');
 		$query = $this->db->get();
 		$row = $query->result_array();
+
+		return $row;
+	}
+	function getPedido($id_pedido=""){
+		$this->db->select('pedido2cliente.*,pedido.*,productos.nombre,productos.codigo,productos.nombre,usuarios.nombre_completo, u.nombre_completo as empleado_vendio');
+		$this->db->from('pedido2cliente');
+		$this->db->join('pedido', 'pedido.id_pedido = pedido2cliente.id_pedido');
+		$this->db->join('productos', 'productos.id_producto = pedido2cliente.id_producto');
+		$this->db->join('usuarios', 'usuarios.id_usuario = pedido.id_usuario_compra');
+		$this->db->join('usuarios as u', 'u.id_usuario = pedido.id_usuario_venta');
+		//$this->db->group_by("pedido2cliente.id_pedido");
+		$this->db->where('pedido2cliente.id_pedido', $id_pedido);
+		$this->db->order_by('pedido2cliente.creacion', 'ASC');
+		$query = $this->db->get();
+		$row = $query->row();
 
 		return $row;
 	}
@@ -147,12 +165,12 @@ class Vinos_model extends CI_Model  {
 		$descuento = $this->session->userdata('descuento');
 		$descripcion = $this->session->userdata('descripcion');
 		$fecha_entrega = $this->session->userdata('fecha_entrega');
-		if ($usuario->empleado == 1) {
+		if ($usuario->empleado == 0) {
 		$pedido = array(
 			'id_sucursal' => 1,
 			'id_usuario_compra' => $usuario->id_usuario,
 			'id_usuario_venta' => 1,
-			'descuento' => 0,
+			'descuento' => $descuento,
 			'estatus' => "En proceso de creacion",
 			'descripcion' => $descripcion,
 			'fecha_entrega' =>$fecha_entrega,
