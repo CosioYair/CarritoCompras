@@ -350,7 +350,6 @@ function getProductsByCategory() {
 function getTitleCategory() {
   $.get("cart/getTitleCategory", function (result) {
     products.prop.titleCategory = result[0].nombre;
-    console.log(result);
   });
 }
 

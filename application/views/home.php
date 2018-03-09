@@ -25,7 +25,7 @@
 				<!--<div class="item-slick1 item3-slick1" style="background-image: url(<?php echo base_url(); ?>assets/images/master-slide-04.jpg);">
 					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
 						<span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="rotateInDownLeft">
-							Vinateria el diamante negro	
+							Vinateria el diamante negro
 						</span>
 
 						<h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37" data-appear="rotateInUpRight">
@@ -33,7 +33,7 @@
 						</h2>
 
 						<div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="rotateIn">
-							
+
 							<a href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
 								Shop Now
 							</a>
@@ -58,7 +58,8 @@
 				<div v-for="product in products.prop.productsHome" class="col-sm-10 col-md-4 p-b-30 m-l-r-auto">
 					<div class="block3">
 						<div class="block2-img wrap-pic-w of-hidden pos-relative">
-							<img src="<?php echo base_url(); ?>assets/images/item-07.jpg" alt="IMG-PRODUCT">
+							<img v-if="!product.imagen_producto" src="<?php echo base_url(); ?>assets/images/item-07.jpg" alt="IMG-PRODUCT">
+              <img v-else :src="product.imagen_producto" alt="IMG">
 							<div class="block2-overlay trans-0-4">
 								<div class="block2-btn-addcart w-size1 trans-0-4">
 									<!-- Button -->
