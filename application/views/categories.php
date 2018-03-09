@@ -11,7 +11,8 @@
 				<div v-for="product in products.prop.productsCategory" class="col-sm-10 col-md-4 p-b-30 m-l-r-auto">
 					<div class="block3">
 						<div class="block2-img wrap-pic-w of-hidden pos-relative">
-							<img src="<?php echo base_url(); ?>assets/images/item-07.jpg" alt="IMG-PRODUCT">
+							<img v-if="product.imagen_producto.length == 0" src="<?php echo base_url(); ?>assets/images/item-07.jpg" alt="IMG-PRODUCT">
+							<img v-else :src="product.imagen_producto" alt="IMG">
 							<div class="block2-overlay trans-0-4">
 								<div class="block2-btn-addcart w-size1 trans-0-4">
 									<!-- Button -->
