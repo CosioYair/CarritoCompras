@@ -37,7 +37,6 @@ function getProductsByCategory(){
 function getTitleCategory(){
   $.get("cart/getTitleCategory", result => {
     products.prop.titleCategory = result[0].nombre;
-    console.log(result)
   });
 }
 
