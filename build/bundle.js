@@ -330,6 +330,7 @@ var products = {
 function getProducts() {
   $.get("cart/getProductos", function (result) {
     products.prop.productsHome = result.response;
+    console.log(result.response[0].imagen_producto);
   });
 }
 

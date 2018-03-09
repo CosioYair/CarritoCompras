@@ -84,7 +84,8 @@
 							<ul class="header-cart-wrapitem">
 								<li v-for="(product, index) in cart.prop.productsCart" class="header-cart-item">
 									<div @click="cart.method.removeToCart(index)" class="header-cart-item-img">
-										<img src="<?php echo base_url(); ?>assets/images/item-cart-01.jpg" alt="IMG">
+										<img v-if="product.imagen_producto.length == 0" src="<?php echo base_url(); ?>assets/images/item-cart-01.jpg" alt="IMG">
+										<img v-else :src="product.imagen_producto" alt="IMG">
 									</div>
 
 									<div class="header-cart-item-txt">
@@ -140,7 +141,8 @@
 							<ul class="header-cart-wrapitem">
 								<li v-for="(product, index) in cart.prop.productsCart" class="header-cart-item">
 									<div @click="cart.method.removeToCart(index)" class="header-cart-item-img">
-										<img src="<?php echo base_url(); ?>assets/images/item-cart-01.jpg" alt="IMG">
+										<img v-if="product.imagen_producto.length == 0" src="<?php echo base_url(); ?>assets/images/item-cart-01.jpg" alt="IMG">
+										<img v-else :src="product.imagen_producto" alt="IMG">
 									</div>
 
 									<div class="header-cart-item-txt">
